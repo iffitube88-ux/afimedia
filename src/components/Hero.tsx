@@ -41,7 +41,7 @@ export default function Hero() {
               </div>
               {/* Initials avatar */}
               <div className="absolute inset-2 rounded-full overflow-hidden border-4 border-gray-900 shadow-2xl shadow-violet-500/20 bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center">
-                <span className="text-6xl sm:text-7xl font-bold text-white">AR</span>
+                <span className="text-6xl sm:text-7xl font-bold text-white">IM</span>
               </div>
               {/* Floating badges */}
               <div className="absolute -top-2 -right-2 px-3 py-1.5 bg-gray-900 border border-gray-700 rounded-full text-xs font-medium text-violet-400 shadow-lg animate-bounce" style={{ animationDuration: '3s' }}>

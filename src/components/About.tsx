@@ -12,9 +12,10 @@ export default function About({ darkMode }: AboutProps) {
             <div className="lg:w-2/5 relative bg-gradient-to-br from-violet-600 via-fuchsia-500 to-cyan-500 flex items-center justify-center">
               <div className="text-center p-8">
                 <div className="w-40 h-40 sm:w-48 sm:h-48 mx-auto rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/20 flex items-center justify-center mb-6">
-                  <span className="text-6xl sm:text-7xl font-bold text-white">AR</span>
+                  <span className="text-6xl sm:text-7xl font-bold text-white">IM</span>
                 </div>
-                <div className="text-white/80 text-sm font-medium">Digital Marketing Specialist</div>
+                <div className="text-white text-lg font-bold mb-1">IRFAN ABDUL MAJID</div>
+                <div className="text-white/80 text-sm font-medium">Founder, IffiMedia</div>
               </div>
             </div>
 
@@ -24,23 +25,23 @@ export default function About({ darkMode }: AboutProps) {
                 About Me
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                Hey, I'm Alex 👋
+                Hey, I'm Iffi 👋
               </h2>
               <div className={`space-y-4 text-base leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 <p>
-                  I'm a freelance digital marketing specialist with 5+ years of experience helping brands 
+                  I'm the founder of <strong className={darkMode ? 'text-white' : 'text-gray-900'}>IffiMedia</strong>, a digital marketing agency with 5+ years of experience helping brands 
                   turn their ad spend into predictable, scalable revenue. I've managed over $3.2M in ad 
                   spend across Meta, Google, and TikTok — and I'm obsessed with finding the intersection 
                   of data and creativity.
                 </p>
                 <p>
-                  Before going freelance, I worked in-house at a DTC brand where I scaled their monthly 
+                  Before starting IffiMedia, I worked in-house at a DTC brand where I scaled their monthly 
                   revenue from $50K to $400K in 18 months. That experience taught me what actually works 
                   (and what doesn't) when it comes to growing a business through digital channels.
                 </p>
                 <p>
-                  I specialize in <strong className={darkMode ? 'text-white' : 'text-gray-900'}>paid ads, SEO, and conversion optimization</strong> — 
-                  but I believe the best marketing strategies connect all the dots. That's why I take a 
+                  At IffiMedia, we specialize in <strong className={darkMode ? 'text-white' : 'text-gray-900'}>paid ads, SEO, and conversion optimization</strong> — 
+                  but we believe the best marketing strategies connect all the dots. That's why we take a 
                   holistic approach, making sure every channel works together to drive real business results.
                 </p>
               </div>

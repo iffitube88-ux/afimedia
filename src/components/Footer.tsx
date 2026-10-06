@@ -11,12 +11,12 @@ export default function Footer({ darkMode }: FooterProps) {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-violet-500/50 bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">AR</span>
+                <span className="text-white font-bold text-sm">IM</span>
               </div>
-              <span className="font-bold text-lg">Alex Rivera</span>
+              <span className="font-bold text-lg">IffiMedia</span>
             </div>
             <p className={`max-w-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Freelance digital marketing specialist helping ambitious brands scale revenue through data-driven paid ads, SEO, and conversion optimization.
+              Digital marketing agency helping ambitious brands scale revenue through data-driven paid ads, SEO, and conversion optimization. Founded by Irfan Abdul Majid.
             </p>
             <div className="flex gap-3">
               {['LinkedIn', 'Twitter', 'Instagram'].map(platform => (
@@ -59,7 +59,7 @@ export default function Footer({ darkMode }: FooterProps) {
         {/* Bottom */}
         <div className={`pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 ${darkMode ? 'border-gray-800' : 'border-gray-200'}`}>
           <p className={`text-sm ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-            © 2026 Alex Rivera. All rights reserved.
+            © 2026 IffiMedia. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className={`text-sm ${darkMode ? 'text-gray-500 hover:text-gray-300' : 'text-gray-400 hover:text-gray-600'}`}>Privacy Policy</a>

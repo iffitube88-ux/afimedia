@@ -35,11 +35,11 @@ export default function Contact({ darkMode }: ContactProps) {
             {/* Profile card */}
             <div className={`flex items-center gap-4 p-4 rounded-2xl mb-8 ${darkMode ? 'bg-gray-800/50 border border-gray-700' : 'bg-gray-100 border border-gray-200'}`}>
               <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-violet-500/30 bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">AR</span>
+                <span className="text-white font-bold text-lg">IM</span>
               </div>
               <div>
-                <div className="font-bold">Alex Rivera</div>
-                <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Digital Marketing Specialist</div>
+                <div className="font-bold">Irfan Abdul Majid</div>
+                <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Founder, IffiMedia</div>
                 <div className="flex items-center gap-1 mt-1">
                   <span className="w-2 h-2 rounded-full bg-green-400"></span>
                   <span className="text-xs text-green-400">Available now</span>
@@ -54,7 +54,7 @@ export default function Contact({ darkMode }: ContactProps) {
                 </div>
                 <div>
                   <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Email</div>
-                  <div className="font-medium">alex@digitalmarketing.pro</div>
+                  <div className="font-medium">iffi@iffimedia.com</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
