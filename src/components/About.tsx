@@ -1,5 +1,3 @@
-import { PROFILE_IMAGE } from '../config';
-
 interface AboutProps {
   darkMode: boolean;
 }
@@ -10,15 +8,13 @@ export default function About({ darkMode }: AboutProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`rounded-3xl border overflow-hidden ${darkMode ? 'bg-gray-900/50 border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
           <div className="flex flex-col lg:flex-row">
-            {/* Image side */}
-            <div className="lg:w-2/5 relative">
-              <div className="aspect-square lg:aspect-auto lg:h-full relative overflow-hidden">
-                <img
-                  src={PROFILE_IMAGE}
-                  alt="Alex Rivera"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-gray-900/30"></div>
+            {/* Avatar side */}
+            <div className="lg:w-2/5 relative bg-gradient-to-br from-violet-600 via-fuchsia-500 to-cyan-500 flex items-center justify-center">
+              <div className="text-center p-8">
+                <div className="w-40 h-40 sm:w-48 sm:h-48 mx-auto rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/20 flex items-center justify-center mb-6">
+                  <span className="text-6xl sm:text-7xl font-bold text-white">AR</span>
+                </div>
+                <div className="text-white/80 text-sm font-medium">Digital Marketing Specialist</div>
               </div>
             </div>
 

@@ -1,5 +1,3 @@
-import { PROFILE_IMAGE } from '../config';
-
 interface FooterProps {
   darkMode: boolean;
 }
@@ -12,8 +10,8 @@ export default function Footer({ darkMode }: FooterProps) {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-violet-500/50">
-                <img src={PROFILE_IMAGE} alt="Alex Rivera" className="w-full h-full object-cover" />
+              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-violet-500/50 bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">AR</span>
               </div>
               <span className="font-bold text-lg">Alex Rivera</span>
             </div>

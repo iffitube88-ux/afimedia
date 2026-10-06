@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { PROFILE_IMAGE } from '../config';
 
 export default function Hero() {
   const [count1, setCount1] = useState(0);
@@ -33,20 +32,16 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-          {/* Profile Image */}
+          {/* Profile Avatar */}
           <div className="relative flex-shrink-0">
             <div className="relative w-56 h-56 sm:w-72 sm:h-72">
               {/* Decorative ring */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 via-fuchsia-500 to-cyan-500 p-1 animate-spin" style={{ animationDuration: '8s' }}>
                 <div className="w-full h-full rounded-full bg-gray-950"></div>
               </div>
-              {/* Profile photo */}
-              <div className="absolute inset-2 rounded-full overflow-hidden border-4 border-gray-900 shadow-2xl shadow-violet-500/20">
-                <img
-                  src={PROFILE_IMAGE}
-                  alt="Alex Rivera - Digital Marketing Specialist"
-                  className="w-full h-full object-cover"
-                />
+              {/* Initials avatar */}
+              <div className="absolute inset-2 rounded-full overflow-hidden border-4 border-gray-900 shadow-2xl shadow-violet-500/20 bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center">
+                <span className="text-6xl sm:text-7xl font-bold text-white">AR</span>
               </div>
               {/* Floating badges */}
               <div className="absolute -top-2 -right-2 px-3 py-1.5 bg-gray-900 border border-gray-700 rounded-full text-xs font-medium text-violet-400 shadow-lg animate-bounce" style={{ animationDuration: '3s' }}>
