@@ -1,5 +1,3 @@
-import { PROFILE_IMAGE } from '../config';
-
 interface FooterProps {
   darkMode: boolean;
 }
@@ -11,11 +9,11 @@ export default function Footer({ darkMode }: FooterProps) {
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-violet-500/50">
-                <img src={PROFILE_IMAGE} alt="IffiMedia" className="w-full h-full object-cover" />
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-violet-500/30">
+                i
               </div>
-              <span className="font-bold text-lg">IffiMedia</span>
+              <span className="font-bold text-lg">iffiMedia</span>
             </div>
             <p className={`max-w-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Digital marketing agency helping ambitious brands scale revenue through data-driven paid ads, SEO, and conversion optimization. Founded by Irfan Abdul Majid.
@@ -61,7 +59,7 @@ export default function Footer({ darkMode }: FooterProps) {
         {/* Bottom */}
         <div className={`pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 ${darkMode ? 'border-gray-800' : 'border-gray-200'}`}>
           <p className={`text-sm ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-            © 2026 IffiMedia. All rights reserved.
+            © 2026 iffiMedia. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className={`text-sm ${darkMode ? 'text-gray-500 hover:text-gray-300' : 'text-gray-400 hover:text-gray-600'}`}>Privacy Policy</a>

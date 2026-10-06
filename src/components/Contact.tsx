@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { PROFILE_IMAGE } from '../config';
-
 interface ContactProps {
   darkMode: boolean;
 }
@@ -31,21 +29,23 @@ export default function Contact({ darkMode }: ContactProps) {
               </span>
             </h2>
             <p className={`text-lg mb-8 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Book a free 30-minute discovery call to discuss your goals, current challenges, and how I can help you scale.
+              Book a free 30-minute discovery call to discuss your goals, current challenges, and how iffiMedia can help you scale.
             </p>
 
-            {/* Profile card */}
-            <div className={`flex items-center gap-4 p-4 rounded-2xl mb-8 ${darkMode ? 'bg-gray-800/50 border border-gray-700' : 'bg-gray-100 border border-gray-200'}`}>
-              <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-violet-500/30">
-                <img src={PROFILE_IMAGE} alt="Irfan Abdul Majid" className="w-full h-full object-cover" />
-              </div>
-              <div>
-                <div className="font-bold">Irfan Abdul Majid</div>
-                <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Founder, IffiMedia</div>
-                <div className="flex items-center gap-1 mt-1">
-                  <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                  <span className="text-xs text-green-400">Available now</span>
+            {/* Founder info card */}
+            <div className={`p-6 rounded-2xl mb-8 ${darkMode ? 'bg-gray-800/50 border border-gray-700' : 'bg-gray-100 border border-gray-200'}`}>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center text-white font-bold">
+                  i
                 </div>
+                <div>
+                  <div className="font-bold">iffiMedia</div>
+                  <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Founded by Irfan Abdul Majid</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-green-400"></span>
+                <span className="text-xs text-green-400">Available for new projects</span>
               </div>
             </div>
 
@@ -81,7 +81,7 @@ export default function Contact({ darkMode }: ContactProps) {
 
             {/* Social links */}
             <div className="mt-10">
-              <div className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Connect with me</div>
+              <div className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Connect with us</div>
               <div className="flex gap-3">
                 {['LinkedIn', 'Twitter', 'Instagram', 'YouTube'].map(platform => (
                   <a key={platform} href="#" className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${darkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
@@ -147,7 +147,7 @@ export default function Contact({ darkMode }: ContactProps) {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Tell me about your project *</label>
+                    <label className="block text-sm font-medium mb-2">Tell us about your project *</label>
                     <textarea
                       required
                       rows={4}
@@ -173,7 +173,7 @@ export default function Contact({ darkMode }: ContactProps) {
                 <div className="text-5xl mb-4">✅</div>
                 <h3 className="text-2xl font-bold mb-3">Message Sent!</h3>
                 <p className={darkMode ? 'text-gray-400' : 'text-gray-600'}>
-                  Thanks for reaching out! I'll get back to you within 24 hours to schedule our discovery call.
+                  Thanks for reaching out! We'll get back to you within 24 hours to schedule our discovery call.
                 </p>
               </div>
             )}
