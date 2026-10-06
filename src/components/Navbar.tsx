@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-
-const PROFILE_IMAGE = "https://image.qwenlm.ai/generated-images/3f7f01c6-4550-45cd-88a2-2b72b52b498c/_result.png";
+import { PROFILE_IMAGE } from '../config';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -17,7 +16,7 @@ export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const links = ['Services', 'Results', 'Pricing', 'Reviews', 'Audit', 'Contact'];
+  const links = ['Services', 'Results', 'Pricing', 'Reviews', 'Audit', 'Career', 'Contact'];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? (darkMode ? 'bg-gray-950/90 backdrop-blur-xl shadow-lg shadow-purple-500/5' : 'bg-white/90 backdrop-blur-xl shadow-lg') : 'bg-transparent'}`}>

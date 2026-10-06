@@ -8,6 +8,7 @@ import CaseStudies from './components/CaseStudies';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import AuditWidget from './components/AuditWidget';
+import Career from './components/Career';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -35,6 +36,7 @@ function App() {
       <Pricing darkMode={darkMode} />
       <Testimonials darkMode={darkMode} />
       <AuditWidget darkMode={darkMode} />
+      <Career darkMode={darkMode} />
       <Contact darkMode={darkMode} />
       <Footer darkMode={darkMode} />
     </div>

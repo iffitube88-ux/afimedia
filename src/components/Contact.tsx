@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const PROFILE_IMAGE = "https://image.qwenlm.ai/generated-images/3f7f01c6-4550-45cd-88a2-2b72b52b498c/_result.png";
+import { PROFILE_IMAGE } from '../config';
 
 interface ContactProps {
   darkMode: boolean;

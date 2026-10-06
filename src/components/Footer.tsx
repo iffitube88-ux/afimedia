@@ -1,4 +1,4 @@
-const PROFILE_IMAGE = "https://image.qwenlm.ai/generated-images/3f7f01c6-4550-45cd-88a2-2b72b52b498c/_result.png";
+import { PROFILE_IMAGE } from '../config';
 
 interface FooterProps {
   darkMode: boolean;
@@ -33,7 +33,7 @@ export default function Footer({ darkMode }: FooterProps) {
           <div>
             <h4 className="font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {['Services', 'Case Studies', 'Pricing', 'Reviews', 'Free Audit'].map(link => (
+              {['Services', 'Case Studies', 'Pricing', 'Reviews', 'Free Audit', 'Career'].map(link => (
                 <li key={link}>
                   <a href={`#${link.toLowerCase().replace(' ', '-')}`} className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
                     {link}
