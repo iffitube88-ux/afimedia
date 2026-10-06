@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { PROFILE_IMAGE } from '../config';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -22,8 +23,8 @@ export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-violet-500/50 shadow-lg shadow-violet-500/20 bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">IM</span>
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-violet-500/50 shadow-lg shadow-violet-500/20">
+              <img src={PROFILE_IMAGE} alt="Irfan Abdul Majid" className="w-full h-full object-cover" />
             </div>
             <span className="font-bold text-lg hidden sm:block">IffiMedia</span>
           </a>

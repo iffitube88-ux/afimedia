@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { PROFILE_IMAGE } from '../config';
 
 export default function Hero() {
   const [count1, setCount1] = useState(0);
@@ -39,9 +40,13 @@ export default function Hero() {
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 via-fuchsia-500 to-cyan-500 p-1 animate-spin" style={{ animationDuration: '8s' }}>
                 <div className="w-full h-full rounded-full bg-gray-950"></div>
               </div>
-              {/* Initials avatar */}
-              <div className="absolute inset-2 rounded-full overflow-hidden border-4 border-gray-900 shadow-2xl shadow-violet-500/20 bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center">
-                <span className="text-6xl sm:text-7xl font-bold text-white">IM</span>
+              {/* Profile photo */}
+              <div className="absolute inset-2 rounded-full overflow-hidden border-4 border-gray-900 shadow-2xl shadow-violet-500/20">
+                <img
+                  src={PROFILE_IMAGE}
+                  alt="Irfan Abdul Majid - Founder of IffiMedia"
+                  className="w-full h-full object-cover"
+                />
               </div>
               {/* Floating badges */}
               <div className="absolute -top-2 -right-2 px-3 py-1.5 bg-gray-900 border border-gray-700 rounded-full text-xs font-medium text-violet-400 shadow-lg animate-bounce" style={{ animationDuration: '3s' }}>

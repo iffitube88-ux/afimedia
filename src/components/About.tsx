@@ -1,3 +1,5 @@
+import { PROFILE_IMAGE } from '../config';
+
 interface AboutProps {
   darkMode: boolean;
 }
@@ -11,8 +13,8 @@ export default function About({ darkMode }: AboutProps) {
             {/* Avatar side */}
             <div className="lg:w-2/5 relative bg-gradient-to-br from-violet-600 via-fuchsia-500 to-cyan-500 flex items-center justify-center">
               <div className="text-center p-8">
-                <div className="w-40 h-40 sm:w-48 sm:h-48 mx-auto rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/20 flex items-center justify-center mb-6">
-                  <span className="text-6xl sm:text-7xl font-bold text-white">IM</span>
+                <div className="w-40 h-40 sm:w-48 sm:h-48 mx-auto rounded-full overflow-hidden border-4 border-white/20 mb-6 shadow-2xl">
+                  <img src={PROFILE_IMAGE} alt="Irfan Abdul Majid" className="w-full h-full object-cover" />
                 </div>
                 <div className="text-white text-lg font-bold mb-1">IRFAN ABDUL MAJID</div>
                 <div className="text-white/80 text-sm font-medium">Founder, IffiMedia</div>

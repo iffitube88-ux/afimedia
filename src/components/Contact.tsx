@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { PROFILE_IMAGE } from '../config';
+
 interface ContactProps {
   darkMode: boolean;
 }
@@ -34,8 +36,8 @@ export default function Contact({ darkMode }: ContactProps) {
 
             {/* Profile card */}
             <div className={`flex items-center gap-4 p-4 rounded-2xl mb-8 ${darkMode ? 'bg-gray-800/50 border border-gray-700' : 'bg-gray-100 border border-gray-200'}`}>
-              <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-violet-500/30 bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">IM</span>
+              <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-violet-500/30">
+                <img src={PROFILE_IMAGE} alt="Irfan Abdul Majid" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="font-bold">Irfan Abdul Majid</div>
