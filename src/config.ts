@@ -10,7 +10,7 @@
 // Your photo file: 509288916_1919635395470473_9043100488638243031_n.jpg
 // ============================================================
 
-export const PROFILE_IMAGE = "https://image.qwenlm.ai/generated-images/0bd2ca2c-f4ee-4471-a1bc-706d1744d49d/_result.png";
+export const PROFILE_IMAGE = "https://image.qwenlm.ai/generated-images/14b66ce9-adca-41d3-984d-505a30f4536d/_result.png";
 // export const PROFILE_IMAGE = "/profile.jpg"; // ← Uncomment this line after adding your photo to public/
 
 // ============================================================
