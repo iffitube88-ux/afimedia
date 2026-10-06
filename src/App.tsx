@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
 import Services from './components/Services';
 import Calculator from './components/Calculator';
 import CaseStudies from './components/CaseStudies';
@@ -27,6 +28,7 @@ function App() {
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <Hero />
+      <About darkMode={darkMode} />
       <Services darkMode={darkMode} />
       <Calculator darkMode={darkMode} />
       <CaseStudies darkMode={darkMode} />

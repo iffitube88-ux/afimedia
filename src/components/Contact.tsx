@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+const PROFILE_IMAGE = "https://image.qwenlm.ai/generated-images/3f7f01c6-4550-45cd-88a2-2b72b52b498c/_result.png";
+
 interface ContactProps {
   darkMode: boolean;
 }
@@ -28,9 +30,24 @@ export default function Contact({ darkMode }: ContactProps) {
                 Grow?
               </span>
             </h2>
-            <p className={`text-lg mb-10 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg mb-8 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Book a free 30-minute discovery call to discuss your goals, current challenges, and how I can help you scale.
             </p>
+
+            {/* Profile card */}
+            <div className={`flex items-center gap-4 p-4 rounded-2xl mb-8 ${darkMode ? 'bg-gray-800/50 border border-gray-700' : 'bg-gray-100 border border-gray-200'}`}>
+              <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-violet-500/30">
+                <img src={PROFILE_IMAGE} alt="Alex Rivera" className="w-full h-full object-cover" />
+              </div>
+              <div>
+                <div className="font-bold">Alex Rivera</div>
+                <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Digital Marketing Specialist</div>
+                <div className="flex items-center gap-1 mt-1">
+                  <span className="w-2 h-2 rounded-full bg-green-400"></span>
+                  <span className="text-xs text-green-400">Available now</span>
+                </div>
+              </div>
+            </div>
 
             <div className="space-y-6">
               <div className="flex items-center gap-4">

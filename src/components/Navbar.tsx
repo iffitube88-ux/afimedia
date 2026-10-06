@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const PROFILE_IMAGE = "https://image.qwenlm.ai/generated-images/3f7f01c6-4550-45cd-88a2-2b72b52b498c/_result.png";
+
 interface NavbarProps {
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
@@ -21,9 +23,9 @@ export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? (darkMode ? 'bg-gray-950/90 backdrop-blur-xl shadow-lg shadow-purple-500/5' : 'bg-white/90 backdrop-blur-xl shadow-lg') : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-violet-500/30">
-              A
+          <a href="#" className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-violet-500/50 shadow-lg shadow-violet-500/20">
+              <img src={PROFILE_IMAGE} alt="Alex Rivera" className="w-full h-full object-cover" />
             </div>
             <span className="font-bold text-lg hidden sm:block">Alex Rivera</span>
           </a>
