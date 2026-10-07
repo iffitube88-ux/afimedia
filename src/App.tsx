@@ -336,7 +336,7 @@ function App() {
 
       {/* Contact */}
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Get In Touch</h2>
             <p className="text-xl text-slate-400">
@@ -344,11 +344,10 @@ function App() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Contact Form */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
-              <form className="space-y-5">
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 md:p-10">
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">Send Us a Message</h3>
+            <form className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">Full Name *</label>
                   <input 
@@ -367,6 +366,8 @@ function App() {
                     className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
                   />
                 </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">Phone Number</label>
                   <input 
@@ -386,6 +387,8 @@ function App() {
                   />
                   <p className="text-xs text-slate-500 mt-1">For quick communication via WhatsApp</p>
                 </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Your Website URL <span className="text-slate-500">(Optional)</span>
@@ -410,22 +413,20 @@ function App() {
                     <option value="50k+">$50,000+</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Tell Us About Your Project *</label>
-                  <textarea 
-                    rows={5} 
-                    required
-                    placeholder="What are your goals? What challenges are you facing? What services are you interested in?"
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none text-white placeholder-slate-500"
-                  ></textarea>
-                </div>
-                <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition shadow-lg shadow-blue-500/20">
-                  Send Message →
-                </button>
-              </form>
-            </div>
-
-
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Tell Us About Your Project *</label>
+                <textarea 
+                  rows={5} 
+                  required
+                  placeholder="What are your goals? What challenges are you facing? What services are you interested in?"
+                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none text-white placeholder-slate-500"
+                ></textarea>
+              </div>
+              <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition shadow-lg shadow-blue-500/20">
+                Send Message →
+              </button>
+            </form>
           </div>
         </div>
       </section>
