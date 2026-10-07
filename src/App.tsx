@@ -63,7 +63,7 @@ function App() {
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              {['Services', 'Results', 'Pricing', 'Career', 'Contact'].map((item) => (
+              {['Services', 'Results', 'Pricing', 'Blog', 'Career', 'Contact'].map((item) => (
                 <a 
                   key={item} 
                   href={`#${item.toLowerCase()}`} 
@@ -92,7 +92,7 @@ function App() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-slate-950/95 backdrop-blur-xl border-t border-blue-500/10">
             <div className="px-4 py-6 space-y-3">
-              {['Services', 'Results', 'Pricing', 'Career', 'Contact'].map((item) => (
+              {['Services', 'Results', 'Pricing', 'Blog', 'Career', 'Contact'].map((item) => (
                 <a key={item} href={`#${item.toLowerCase()}`} className="block text-slate-300 hover:text-blue-400 font-medium py-2">
                   {item}
                 </a>
@@ -444,6 +444,116 @@ function App() {
         </div>
       </section>
 
+      {/* Premium Blog Section */}
+      <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
+              Latest <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Insights</span>
+            </h2>
+            <p className="scroll-animate text-xl text-slate-400 max-w-3xl mx-auto opacity-0 stagger-1">
+              Expert tips, strategies, and industry updates to help your business grow
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: '10 Proven SEO Strategies to Boost Your Rankings in 2026',
+                excerpt: 'Discover the latest SEO techniques that are driving real results for our clients. From technical optimization to content strategy, learn how to dominate search results.',
+                category: 'SEO',
+                date: 'Jan 6, 2026',
+                readTime: '8 min read',
+                image: '🔍'
+              },
+              {
+                title: 'How to Maximize ROAS with Google Ads: A Complete Guide',
+                excerpt: 'Learn the exact strategies we use to achieve 4.8x+ ROAS for our clients. From audience targeting to bid optimization, master Google Ads like a pro.',
+                category: 'PPC',
+                date: 'Jan 3, 2026',
+                readTime: '12 min read',
+                image: '🎯'
+              },
+              {
+                title: 'Email Marketing Automation: The Key to 47% Revenue Growth',
+                excerpt: 'See how we helped clients generate nearly half their revenue through strategic email automation. Learn the flows and sequences that actually convert.',
+                category: 'Email Marketing',
+                date: 'Dec 28, 2025',
+                readTime: '10 min read',
+                image: '✉️'
+              },
+              {
+                title: 'Social Media Trends 2026: What\'s Working Right Now',
+                excerpt: 'Stay ahead of the curve with the latest social media trends. From TikTok strategies to Instagram Reels, discover what\'s driving engagement in 2026.',
+                category: 'Social Media',
+                date: 'Dec 22, 2025',
+                readTime: '7 min read',
+                image: '📱'
+              },
+              {
+                title: 'Conversion Rate Optimization: Turn More Visitors into Customers',
+                excerpt: 'Learn the psychological triggers and UX principles that increase conversions by 30%+. Real examples and actionable tips you can implement today.',
+                category: 'CRO',
+                date: 'Dec 15, 2025',
+                readTime: '9 min read',
+                image: '📈'
+              },
+              {
+                title: 'Local SEO Guide: Dominate Your Market in 2026',
+                excerpt: 'Complete guide to local SEO including Google Business Profile optimization, local citations, and ranking strategies for local businesses.',
+                category: 'Local SEO',
+                date: 'Dec 10, 2025',
+                readTime: '11 min read',
+                image: '📍'
+              }
+            ].map((post, idx) => (
+              <div key={idx} className="scroll-animate group relative opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-blue-500/20 overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+                  {/* Blog Post Image/Icon */}
+                  <div className="h-48 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-8xl">
+                    {post.image}
+                  </div>
+                  
+                  {/* Blog Post Content */}
+                  <div className="p-8 flex-1 flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full">
+                        {post.category}
+                      </span>
+                      <span className="text-slate-500 text-xs">{post.date}</span>
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-1">
+                      {post.excerpt}
+                    </p>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-500 text-xs">{post.readTime}</span>
+                      <a href="#" className="text-blue-400 font-semibold text-sm hover:text-cyan-400 transition-colors group-hover:translate-x-1 inline-flex items-center gap-2">
+                        Read More
+                        <span>→</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* View All Blog Posts Button */}
+          <div className="text-center mt-12">
+            <a href="#" className="inline-block px-10 py-5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
+              View All Articles →
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Premium Contact Section */}
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-4xl mx-auto">
@@ -566,6 +676,36 @@ function App() {
             <p className="text-slate-400 mb-6 text-lg">
               Founded by <a href="https://ae.linkedin.com/in/iambk12" target="_blank" rel="noopener noreferrer" className="text-blue-400 font-semibold hover:text-cyan-400 transition-colors underline decoration-blue-400/30 hover:decoration-cyan-400">Irfan Abdul Majid</a>
             </p>
+            
+            {/* Social Media Links */}
+            <div className="flex justify-center gap-6 mb-6">
+              <a href="https://facebook.com/lamamedia" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl bg-slate-800/50 border border-blue-500/20 flex items-center justify-center hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:scale-110 group">
+                <svg className="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="https://twitter.com/lamamedia" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl bg-slate-800/50 border border-blue-500/20 flex items-center justify-center hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:scale-110 group">
+                <svg className="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+              <a href="https://linkedin.com/company/lamamedia" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl bg-slate-800/50 border border-blue-500/20 flex items-center justify-center hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:scale-110 group">
+                <svg className="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href="https://instagram.com/lamamedia" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl bg-slate-800/50 border border-blue-500/20 flex items-center justify-center hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:scale-110 group">
+                <svg className="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+              </a>
+              <a href="https://youtube.com/@lamamedia" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl bg-slate-800/50 border border-blue-500/20 flex items-center justify-center hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:scale-110 group">
+                <svg className="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+            </div>
+            
             <p className="text-slate-500 text-sm">
               © 2026 lamaMedia. All rights reserved. Premium Digital Marketing Agency.
             </p>
