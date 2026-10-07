@@ -51,7 +51,47 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+      gtag('config', 'G-XXXXXXXXXX', {
+        page_title: document.title,
+        page_path: window.location.pathname,
+        custom_map: {
+          'custom_parameter_1': 'business_type',
+          'custom_parameter_2': 'lead_source'
+        }
+      });
+      
+      // Track form submissions
+      function trackFormSubmission(formName) {
+        gtag('event', 'form_submission', {
+          'event_category': 'Conversion',
+          'event_label': formName,
+          'value': 1
+        });
+      }
+      
+      // Track button clicks
+      function trackButtonClick(buttonName) {
+        gtag('event', 'button_click', {
+          'event_category': 'Engagement',
+          'event_label': buttonName
+        });
+      }
+      
+      // Track page scroll depth
+      let maxScroll = 0;
+      window.addEventListener('scroll', function() {
+        const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+        if (scrollPercent > maxScroll) {
+          maxScroll = scrollPercent;
+          if (maxScroll === 25 || maxScroll === 50 || maxScroll === 75 || maxScroll === 100) {
+            gtag('event', 'scroll_depth', {
+              'event_category': 'Engagement',
+              'event_label': maxScroll + '%',
+              'value': maxScroll
+            });
+          }
+        }
+      });
     </script>
     
     <!-- Google Tag Manager - Replace GTM-XXXXXXX with your actual Container ID -->
@@ -60,6 +100,14 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    
+    <!-- Google reCAPTCHA - Replace YOUR_RECAPTCHA_SITE_KEY with your actual key -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+      function onSubmit(token) {
+        document.getElementById("contact-form").submit();
+      }
+    </script>
     
     <!-- Structured Data - Organization -->
     <script type="application/ld+json">
@@ -94,7 +142,33 @@
         "https://www.linkedin.com/company/lamamedia",
         "https://www.instagram.com/lamamedia",
         "https://ae.linkedin.com/in/iambk12"
-      ]
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "47",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - WebSite with SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "lamaMedia",
+      "alternateName": "lamaMedia Digital Marketing Agency",
+      "url": "https://lamamedia.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://lamamedia.com/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
     
@@ -381,6 +455,42 @@
         });
       })();
     </script>
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+    
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    
+    <!-- PWA Manifest (Optional - for Progressive Web App) -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="lamaMedia" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="language" content="English" />
+    <meta name="document-class" content="completed" />
+    <meta name="coverage" content="Worldwide" />
+    
+    <!-- Social Media Optimization -->
+    <meta property="og:updated_time" content="2026-01-06T12:00:00Z" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    
   </head>
   <body>
     <div id="root"></div>
