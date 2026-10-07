@@ -115,13 +115,33 @@ export default function CareerPage({ onBack }: CareerPageProps) {
     setApplicationSubmitted(false);
   };
 
-  const handleSubmitApplication = (e: React.FormEvent) => {
+  const handleSubmitApplication = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setApplicationSubmitted(true);
-    setTimeout(() => {
-      setSelectedJob(null);
-      setApplicationSubmitted(false);
-    }, 3000);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/YOUR_CAREER_FORM_ID', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setApplicationSubmitted(true);
+        form.reset();
+        setTimeout(() => {
+          setSelectedJob(null);
+          setApplicationSubmitted(false);
+        }, 3000);
+      } else {
+        alert('There was an error submitting your application. Please try again.');
+      }
+    } catch (error) {
+      alert('There was an error submitting your application. Please try again.');
+    }
   };
 
   return (
@@ -240,11 +260,15 @@ export default function CareerPage({ onBack }: CareerPageProps) {
 
             {!applicationSubmitted ? (
               <form onSubmit={handleSubmitApplication} className="p-8 space-y-6">
+                <input type="hidden" name="_subject" value={`Job Application: ${selectedJob}`} />
+                <input type="hidden" name="position" value={selectedJob || ''} />
+                
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-slate-300 mb-2">Full Name *</label>
                     <input
                       type="text"
+                      name="full_name"
                       required
                       className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
                       placeholder="John Smith"
@@ -254,6 +278,7 @@ export default function CareerPage({ onBack }: CareerPageProps) {
                     <label className="block text-sm font-semibold text-slate-300 mb-2">Email *</label>
                     <input
                       type="email"
+                      name="email"
                       required
                       className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
                       placeholder="john@example.com"
@@ -266,6 +291,7 @@ export default function CareerPage({ onBack }: CareerPageProps) {
                     <label className="block text-sm font-semibold text-slate-300 mb-2">Phone *</label>
                     <input
                       type="tel"
+                      name="phone"
                       required
                       className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
                       placeholder="+1 (555) 000-0000"
@@ -275,6 +301,7 @@ export default function CareerPage({ onBack }: CareerPageProps) {
                     <label className="block text-sm font-semibold text-slate-300 mb-2">LinkedIn Profile</label>
                     <input
                       type="url"
+                      name="linkedin"
                       className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
                       placeholder="https://linkedin.com/in/yourprofile"
                     />
@@ -285,6 +312,7 @@ export default function CareerPage({ onBack }: CareerPageProps) {
                   <label className="block text-sm font-semibold text-slate-300 mb-2">Portfolio / Website</label>
                   <input
                     type="url"
+                    name="portfolio"
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
                     placeholder="https://yourportfolio.com"
                   />
@@ -293,6 +321,7 @@ export default function CareerPage({ onBack }: CareerPageProps) {
                 <div>
                   <label className="block text-sm font-semibold text-slate-300 mb-2">Years of Experience *</label>
                   <select
+                    name="experience"
                     required
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-blue-500 focus:outline-none"
                   >
@@ -309,6 +338,7 @@ export default function CareerPage({ onBack }: CareerPageProps) {
                   <label className="block text-sm font-semibold text-slate-300 mb-2">Upload Resume *</label>
                   <input
                     type="file"
+                    name="resume"
                     required
                     accept=".pdf,.doc,.docx"
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-500 file:text-white file:font-semibold hover:file:bg-blue-600"
@@ -319,6 +349,7 @@ export default function CareerPage({ onBack }: CareerPageProps) {
                 <div>
                   <label className="block text-sm font-semibold text-slate-300 mb-2">Cover Letter *</label>
                   <textarea
+                    name="cover_letter"
                     required
                     rows={5}
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none resize-none"
@@ -332,6 +363,10 @@ export default function CareerPage({ onBack }: CareerPageProps) {
                 >
                   Submit Application
                 </button>
+                
+                <p className="text-xs text-slate-500 text-center mt-4">
+                  We'll review your application and get back to you within 5 business days.
+                </p>
               </form>
             ) : (
               <div className="p-12 text-center">

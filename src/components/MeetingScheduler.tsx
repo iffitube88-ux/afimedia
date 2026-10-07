@@ -43,16 +43,43 @@ export default function MeetingScheduler() {
     return dates;
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    setTimeout(() => {
-      setIsOpen(false);
-      setSubmitted(false);
-      setStep(1);
-      setSelectedDate('');
-      setSelectedTime('');
-      setFormData({ name: '', email: '', phone: '', company: '', notes: '' });
-    }, 3000);
+  const handleSubmit = async () => {
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('phone', formData.phone);
+    formDataToSend.append('company', formData.company);
+    formDataToSend.append('notes', formData.notes);
+    formDataToSend.append('meeting_date', selectedDate);
+    formDataToSend.append('meeting_time', selectedTime);
+    formDataToSend.append('meeting_type', meetingTypes[0].title);
+    formDataToSend.append('_subject', `Meeting Request: ${selectedDate} at ${selectedTime}`);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/YOUR_MEETING_FORM_ID', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setIsOpen(false);
+          setSubmitted(false);
+          setStep(1);
+          setSelectedDate('');
+          setSelectedTime('');
+          setFormData({ name: '', email: '', phone: '', company: '', notes: '' });
+        }, 3000);
+      } else {
+        alert('There was an error booking your meeting. Please try again.');
+      }
+    } catch (error) {
+      alert('There was an error booking your meeting. Please try again.');
+    }
   };
 
   return (

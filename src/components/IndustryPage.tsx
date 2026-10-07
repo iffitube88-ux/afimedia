@@ -89,14 +89,39 @@ export default function IndustryPage({ isOpen, onClose, industry }: IndustryPage
 
   const data = industries[industry];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      onClose();
-      setSubmitted(false);
-      setFormData({ name: '', email: '', company: '', message: '' });
-    }, 3000);
+    
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('company', formData.company);
+    formDataToSend.append('message', formData.message);
+    formDataToSend.append('industry', industry);
+    formDataToSend.append('_subject', `Industry Inquiry: ${data?.title || industry}`);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/YOUR_INDUSTRY_FORM_ID', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+        setTimeout(() => {
+          onClose();
+          setSubmitted(false);
+          setFormData({ name: '', email: '', company: '', message: '' });
+        }, 3000);
+      } else {
+        alert('There was an error submitting your inquiry. Please try again.');
+      }
+    } catch (error) {
+      alert('There was an error submitting your inquiry. Please try again.');
+    }
   };
 
   return (
