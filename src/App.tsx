@@ -1,8 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
+import LiveChat from './components/LiveChat';
+import MeetingScheduler from './components/MeetingScheduler';
+import CaseStudyDetail, { detailedCaseStudies } from './components/CaseStudyDetail';
+import IndustryPage from './components/IndustryPage';
+import ROICalculator from './components/ROICalculator';
+import CookieConsent from './components/CookieConsent';
+import VideoSection from './components/VideoSection';
+import ReviewsWidget from './components/ReviewsWidget';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<any>(null);
+  const [selectedIndustry, setSelectedIndustry] = useState<string>('');
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -295,26 +305,28 @@ function App() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { metric: '4.8x ROAS', title: 'E-commerce Fashion Brand', desc: 'Scaled Meta Ads from $5K to $25K monthly with exceptional profitability', results: ['Revenue: $120K/mo', 'CPA reduced by 34%'] },
-              { metric: '+312% Traffic', title: 'Local Dental Practice', desc: 'Complete local SEO overhaul driving massive organic patient acquisition', results: ['28 Page 1 rankings', '+45 new patients/mo'] },
-              { metric: '6.2x ROAS', title: 'SaaS Startup', desc: 'Full-funnel Google Ads strategy for B2B SaaS product launch', results: ['MRR: +$45K in 90 days', 'CAC: $180 (down from $450)'] }
-            ].map((result, idx) => (
+            {detailedCaseStudies.map((caseStudy, idx) => (
               <div key={idx} className="scroll-animate group relative opacity-0" style={{ animationDelay: `${idx * 0.15}s` }}>
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-                <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-blue-500/20 p-8 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 h-full">
+                <div 
+                  className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-blue-500/20 p-8 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 h-full cursor-pointer"
+                  onClick={() => setSelectedCaseStudy(caseStudy)}
+                >
                   <div className="text-4xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4 group-hover:scale-105 transition-transform duration-300">
-                    {result.metric}
+                    {caseStudy.results[0].value}
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">{result.title}</h3>
-                  <p className="text-slate-400 text-sm mb-6 leading-relaxed">{result.desc}</p>
+                  <h3 className="text-2xl font-bold text-white mb-4">{caseStudy.title}</h3>
+                  <p className="text-slate-400 text-sm mb-6 leading-relaxed">{caseStudy.overview.substring(0, 100)}...</p>
                   <div className="text-sm text-slate-300 space-y-2">
-                    {result.results.map((res, rIdx) => (
+                    {caseStudy.results.slice(0, 2).map((res: any, rIdx: number) => (
                       <div key={rIdx} className="flex items-center gap-3 hover:text-blue-400 transition-colors">
                         <span className="text-blue-400">✓</span>
-                        <span>{res}</span>
+                        <span>{res.value} {res.label}</span>
                       </div>
                     ))}
+                  </div>
+                  <div className="mt-4 text-blue-400 font-semibold text-sm group-hover:text-cyan-400 transition">
+                    Read Full Case Study →
                   </div>
                 </div>
               </div>
@@ -751,6 +763,41 @@ function App() {
                       className="w-full px-5 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 resize-none text-white placeholder-slate-500 transition-all"
                     ></textarea>
                   </div>
+
+                  {/* Industry Selection */}
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-300 mb-3">Your Industry</label>
+                    <div className="grid grid-cols-3 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedIndustry('ecommerce')}
+                        className="p-3 bg-slate-800/50 border border-blue-500/20 rounded-xl hover:border-blue-500/50 transition-all text-center group"
+                      >
+                        <div className="text-2xl mb-1">🛒</div>
+                        <div className="text-xs text-slate-300 group-hover:text-blue-400">E-commerce</div>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedIndustry('saas')}
+                        className="p-3 bg-slate-800/50 border border-blue-500/20 rounded-xl hover:border-blue-500/50 transition-all text-center group"
+                      >
+                        <div className="text-2xl mb-1">💻</div>
+                        <div className="text-xs text-slate-300 group-hover:text-blue-400">SaaS</div>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedIndustry('healthcare')}
+                        className="p-3 bg-slate-800/50 border border-blue-500/20 rounded-xl hover:border-blue-500/50 transition-all text-center group"
+                      >
+                        <div className="text-2xl mb-1">🏥</div>
+                        <div className="text-xs text-slate-300 group-hover:text-blue-400">Healthcare</div>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* ROI Calculator */}
+                  <ROICalculator />
+
                   <button type="submit" className="group relative w-full py-5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
                     <span className="relative z-10">Send Message →</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-xl blur opacity-50 group-hover:opacity-100 transition-opacity"></div>
@@ -807,6 +854,10 @@ function App() {
               </a>
             </div>
             
+            <div className="flex justify-center gap-6 mb-6 text-sm">
+              <a href="/privacy-policy" className="text-slate-500 hover:text-blue-400 transition">Privacy Policy</a>
+              <a href="/terms" className="text-slate-500 hover:text-blue-400 transition">Terms of Service</a>
+            </div>
             <p className="text-slate-500 text-sm">
               © 2026 lamaMedia. All rights reserved. Premium Digital Marketing Agency.
             </p>
@@ -853,6 +904,33 @@ function App() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
       </button>
+
+      {/* New Features */}
+      <VideoSection />
+      <ReviewsWidget />
+
+      {/* Live Chat Widget */}
+      <LiveChat />
+
+      {/* Meeting Scheduler */}
+      <MeetingScheduler />
+
+      {/* Cookie Consent */}
+      <CookieConsent />
+
+      {/* Case Study Detail Modal */}
+      <CaseStudyDetail 
+        isOpen={!!selectedCaseStudy} 
+        onClose={() => setSelectedCaseStudy(null)} 
+        caseStudy={selectedCaseStudy} 
+      />
+
+      {/* Industry Page Modal */}
+      <IndustryPage 
+        isOpen={!!selectedIndustry} 
+        onClose={() => setSelectedIndustry('')} 
+        industry={selectedIndustry} 
+      />
     </div>
   );
 }
