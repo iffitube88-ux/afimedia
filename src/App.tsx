@@ -801,7 +801,13 @@ function App() {
         </div>
       </section>
 
-      {/* Premium Footer */}
+      {/* Video Section */}
+      <VideoSection />
+      
+      {/* Reviews Widget */}
+      <ReviewsWidget />
+
+      {/* Premium Footer - LAST CONTENT SECTION */}
       <footer className="py-16 border-t border-blue-500/10 bg-slate-950/50 backdrop-blur-xl relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -903,8 +909,6 @@ function App() {
         </div>
       </footer>
 
-
-
       {/* Back to Top Button */}
       <button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -915,10 +919,6 @@ function App() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
       </button>
-
-      {/* New Features */}
-      <VideoSection />
-      <ReviewsWidget />
 
       {/* Live Chat Widget */}
       <LiveChat />
