@@ -1,0 +1,49 @@
+{
+  "name": "lamaMedia - Digital Marketing Agency",
+  "short_name": "lamaMedia",
+  "description": "Premium digital marketing agency offering SEO, PPC, social media, and email marketing services. Founded by Irfan Abdul Majid.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "marketing", "productivity"],
+  "screenshots": [
+    {
+      "src": "/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with lamaMedia",
+      "url": "/#contact",
+      "icons": [{ "src": "/contact-icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Book a Call",
+      "short_name": "Book",
+      "description": "Schedule a free consultation",
+      "url": "/#meeting",
+      "icons": [{ "src": "/calendar-icon.png", "sizes": "192x192" }]
+    }
+  ]
+}
