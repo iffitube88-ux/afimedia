@@ -1,7 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  // Mouse tracking for hero section
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        });
+      }
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">
@@ -49,37 +96,49 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <header className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-12 md:p-20">
+      <header ref={heroRef} className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Mouse tracking gradient */}
+        <div 
+          className="absolute inset-0 opacity-50 pointer-events-none transition-all duration-300"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 40%)`
+          }}
+        />
+        
+        {/* Floating background elements */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        
+        <div className="max-w-7xl mx-auto relative">
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-12 md:p-20 hover-glow transition-all duration-300">
             <div className="text-center">
-              <div className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
+              <div className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6 animate-fade-in-up">
                 <span className="text-sm font-medium text-blue-400">🏆 Trusted by 47+ Businesses Across USA</span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-fade-in-up stagger-1">
                 <span className="text-white">Digital Marketing Agency</span>
                 <br />
                 <span className="text-blue-400">That Delivers Results</span>
               </h1>
-              <p className="text-xl text-slate-400 mb-6 max-w-3xl mx-auto">
+              <p className="text-xl text-slate-400 mb-6 max-w-3xl mx-auto animate-fade-in-up stagger-2">
                 iffiMedia is a full-service digital marketing agency specializing in <strong className="text-white">SEO services</strong>, <strong className="text-white">PPC advertising</strong>, <strong className="text-white">social media marketing</strong>, and <strong className="text-white">conversion optimization</strong>. We help brands scale revenue through data-driven strategies.
               </p>
-              <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto">
+              <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto animate-fade-in-up stagger-3">
                 Founded by <strong className="text-blue-400">Irfan Abdul Majid</strong> • Serving clients nationwide
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <a href="#contact" className="px-8 py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition shadow-lg shadow-blue-500/20">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 animate-fade-in-up stagger-4">
+                <a href="#contact" className="px-8 py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/40 transition-all duration-300 shadow-lg shadow-blue-500/20">
                   Get Free Marketing Audit
                 </a>
-                <a href="#results" className="px-8 py-4 bg-slate-700 text-white rounded-lg font-semibold hover:bg-slate-600 transition">
+                <a href="#results" className="px-8 py-4 bg-slate-700 text-white rounded-lg font-semibold hover:bg-slate-600 hover:scale-105 transition-all duration-300">
                   View Case Studies
                 </a>
               </div>
-              <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
-                <span>✓ No Long-Term Contracts</span>
-                <span>✓ Transparent Reporting</span>
-                <span>✓ ROI-Focused</span>
-                <span>✓ 24/7 Support</span>
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400 animate-fade-in-up stagger-5">
+                <span className="hover:text-blue-400 transition-colors">✓ No Long-Term Contracts</span>
+                <span className="hover:text-blue-400 transition-colors">✓ Transparent Reporting</span>
+                <span className="hover:text-blue-400 transition-colors">✓ ROI-Focused</span>
+                <span className="hover:text-blue-400 transition-colors">✓ 24/7 Support</span>
               </div>
             </div>
           </div>
@@ -96,7 +155,7 @@ function App() {
               { value: '150%', label: 'Avg. ROAS' },
               { value: '5+', label: 'Years Experience' }
             ].map((stat, idx) => (
-              <article key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 text-center hover:border-blue-500/50 transition">
+              <article key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 text-center hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
                 <div className="text-4xl font-bold text-blue-400 mb-2">{stat.value}</div>
                 <div className="text-slate-400 font-medium">{stat.label}</div>
               </article>
@@ -138,13 +197,13 @@ function App() {
               { icon: '📱', title: 'Social Media', desc: 'Strategy and content creation for brand building', features: ['Content Calendar', 'Short-form Video', 'Community Management'] },
               { icon: '✉️', title: 'Email Marketing', desc: 'Klaviyo/Mailchimp setups and retention marketing', features: ['Automation Flows', 'Lead Nurture', 'Retention Campaigns'] }
             ].map((service, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-6 hover:border-blue-500/50 transition">
-                <div className="text-5xl mb-4">{service.icon}</div>
+              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-6 hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <div className="text-5xl mb-4 hover-scale transition-transform duration-300">{service.icon}</div>
                 <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
                 <p className="text-slate-400 text-sm mb-4">{service.desc}</p>
                 <ul className="text-sm text-slate-300 space-y-2">
                   {service.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-2">
+                    <li key={fIdx} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
                       <span className="text-blue-400">✓</span>
                       {feature}
                     </li>
@@ -172,13 +231,13 @@ function App() {
               { metric: '+312% Traffic', title: 'Local Dental Practice', desc: 'Complete local SEO overhaul driving organic patient acquisition', results: ['28 Page 1 rankings', '+45 new patients/mo'] },
               { metric: '6.2x ROAS', title: 'SaaS Startup', desc: 'Full-funnel Google Ads strategy for B2B SaaS product', results: ['MRR: +$45K in 90 days', 'CAC: $180 (down from $450)'] }
             ].map((result, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 transition">
-                <div className="text-3xl font-bold text-blue-400 mb-3">{result.metric}</div>
+              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.15}s` }}>
+                <div className="text-3xl font-bold text-blue-400 mb-3 hover-scale transition-transform duration-300">{result.metric}</div>
                 <h3 className="text-xl font-bold text-white mb-3">{result.title}</h3>
                 <p className="text-slate-400 text-sm mb-4">{result.desc}</p>
                 <div className="text-sm text-slate-300 space-y-2">
                   {result.results.map((res, rIdx) => (
-                    <div key={rIdx} className="flex items-center gap-2">
+                    <div key={rIdx} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
                       <span className="text-blue-400">✓</span>
                       {res}
                     </div>
@@ -206,24 +265,24 @@ function App() {
               { name: 'Monthly Retainer', price: '$1,500 – $5,000+', note: 'Per month based on workload', features: ['Full campaign management', 'Weekly optimization calls', 'Content creation', 'Priority support'], popular: true },
               { name: 'Advisory', price: '$75 – $200', note: 'Per hour consultation', features: ['Strategy consultation', 'Campaign review', 'Team training', 'Flexible scheduling'], popular: false }
             ].map((plan, idx) => (
-              <div key={idx} className={`bg-slate-800/50 backdrop-blur-sm rounded-xl border-2 ${plan.popular ? 'border-blue-500' : 'border-slate-700'} p-8 relative hover:border-blue-500/50 transition`}>
+              <div key={idx} className={`scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border-2 ${plan.popular ? 'border-blue-500' : 'border-slate-700'} p-8 relative hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0 ${plan.popular ? 'animate-pulse-glow' : ''}`} style={{ animationDelay: `${idx * 0.15}s` }}>
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-500 text-white text-xs font-bold rounded-full">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-500 text-white text-xs font-bold rounded-full animate-pulse">
                     POPULAR
                   </div>
                 )}
                 <h3 className="text-2xl font-bold text-white mb-3">{plan.name}</h3>
-                <div className="text-4xl font-bold text-blue-400 mb-2">{plan.price}</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2 hover-scale transition-transform duration-300">{plan.price}</div>
                 <p className="text-slate-400 text-sm mb-8">{plan.note}</p>
                 <ul className="space-y-3 text-sm text-slate-300 mb-8">
                   {plan.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-3">
+                    <li key={fIdx} className="flex items-center gap-3 hover:text-blue-400 transition-colors">
                       <span className="text-blue-400 text-lg">✓</span>
                       {feature}
                     </li>
                   ))}
                 </ul>
-                <a href="#contact" className={`block w-full py-4 rounded-lg text-center font-semibold transition ${plan.popular ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-slate-700 text-white hover:bg-slate-600'}`}>
+                <a href="#contact" className={`block w-full py-4 rounded-lg text-center font-semibold transition-all duration-300 hover:scale-105 ${plan.popular ? 'bg-blue-500 text-white hover:bg-blue-600 hover:shadow-2xl hover:shadow-blue-500/40' : 'bg-slate-700 text-white hover:bg-slate-600'}`}>
                   {plan.popular ? 'Get Custom Quote' : plan.name === 'Advisory' ? 'Book Session' : 'Request Quote'}
                 </a>
               </div>
@@ -287,10 +346,10 @@ function App() {
                 location: "Seattle, WA"
               }
             ].map((testimonial, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 transition">
+              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-xl">★</span>
+                    <span key={i} className="text-yellow-400 text-xl hover-scale transition-transform duration-300">★</span>
                   ))}
                 </div>
                 <p className="text-slate-300 text-sm mb-6 leading-relaxed">"{testimonial.quote}"</p>
@@ -448,8 +507,8 @@ function App() {
               { step: '03', title: 'Execution & Launch', desc: 'Implement campaigns with precision across all chosen channels' },
               { step: '04', title: 'Optimize & Scale', desc: 'Continuous testing, optimization, and scaling of winning strategies' }
             ].map((item, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 transition relative">
-                <div className="text-6xl font-bold text-blue-500/20 absolute top-4 right-4">{item.step}</div>
+              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0 relative group" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <div className="text-6xl font-bold text-blue-500/20 absolute top-4 right-4 group-hover:text-blue-500/40 transition-colors duration-300">{item.step}</div>
                 <h3 className="text-xl font-bold text-white mb-3 relative z-10">{item.title}</h3>
                 <p className="text-slate-400 text-sm relative z-10">{item.desc}</p>
               </div>
@@ -470,7 +529,7 @@ function App() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {['E-commerce', 'SaaS', 'Healthcare', 'Real Estate', 'Finance', 'Education', 'Restaurant', 'Fitness', 'Legal', 'Technology', 'Retail', 'Manufacturing'].map((industry, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-700 p-4 text-center hover:border-blue-500/50 transition">
+              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-700 p-4 text-center hover:border-blue-500/50 hover-lift hover-scale transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div className="text-white font-medium text-sm">{industry}</div>
               </div>
             ))}
@@ -497,10 +556,10 @@ function App() {
               { q: 'How do you measure success?', a: 'We establish KPIs aligned with your business goals during onboarding. This could be ROAS, conversion rate, organic traffic, lead generation, or revenue growth. We provide detailed monthly reports with actionable insights.' },
               { q: 'Can I cancel my retainer at any time?', a: 'Yes, after the initial commitment period, you can cancel with 30 days notice. We believe in earning your business every month through results, not contracts.' }
             ].map((faq, idx) => (
-              <details key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-6 hover:border-blue-500/50 transition group">
+              <details key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-6 hover:border-blue-500/50 hover-glow transition-all duration-300 opacity-0 group" style={{ animationDelay: `${idx * 0.1}s` }}>
                 <summary className="text-lg font-bold text-white cursor-pointer list-none flex justify-between items-center">
                   {faq.q}
-                  <span className="text-blue-400 text-2xl group-open:rotate-45 transition-transform">+</span>
+                  <span className="text-blue-400 text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
                 <p className="text-slate-400 mt-4 text-sm leading-relaxed">{faq.a}</p>
               </details>
@@ -510,17 +569,23 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Scale Your Business?</h2>
-          <p className="text-xl text-blue-100 mb-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
+        {/* Animated background */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative">
+          <h2 className="scroll-animate text-4xl md:text-5xl font-bold text-white mb-6 opacity-0">Ready to Scale Your Business?</h2>
+          <p className="scroll-animate text-xl text-blue-100 mb-8 opacity-0 stagger-1">
             Get a free marketing audit and discover how we can help you achieve your goals.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#contact" className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition shadow-lg">
+            <a href="#contact" className="scroll-animate px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-lg opacity-0 stagger-2">
               Get Free Audit
             </a>
-            <a href="tel:+15550123" className="px-8 py-4 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-800 transition">
+            <a href="tel:+15550123" className="scroll-animate px-8 py-4 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-800 hover:scale-105 hover:shadow-2xl transition-all duration-300 opacity-0 stagger-3">
               Call Us: (555) 012-3456
             </a>
           </div>
