@@ -336,7 +336,7 @@ function App() {
 
       {/* Contact */}
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Get In Touch</h2>
             <p className="text-xl text-slate-400">
@@ -344,26 +344,162 @@ function App() {
             </p>
           </div>
 
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-10">
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Contact Form */}
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8">
+              <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
+              <form className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Name</label>
-                  <input type="text" className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" />
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Full Name *</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="John Smith"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
-                  <input type="email" className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" />
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Email Address *</label>
+                  <input 
+                    type="email" 
+                    required
+                    placeholder="john@company.com"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    placeholder="+1 (555) 000-0000"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    WhatsApp Number <span className="text-slate-500">(Optional)</span>
+                  </label>
+                  <input 
+                    type="tel" 
+                    placeholder="+1 (555) 000-0000"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
+                  />
+                  <p className="text-xs text-slate-500 mt-1">For quick communication via WhatsApp</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Your Website URL <span className="text-slate-500">(Optional)</span>
+                  </label>
+                  <input 
+                    type="url" 
+                    placeholder="https://yourwebsite.com"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
+                  />
+                  <p className="text-xs text-slate-500 mt-1">So we can review your current marketing before our call</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Monthly Marketing Budget <span className="text-slate-500">(Optional)</span>
+                  </label>
+                  <select className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white">
+                    <option value="">Select budget range</option>
+                    <option value="under-2k">Under $2,000</option>
+                    <option value="2k-5k">$2,000 - $5,000</option>
+                    <option value="5k-15k">$5,000 - $15,000</option>
+                    <option value="15k-50k">$15,000 - $50,000</option>
+                    <option value="50k+">$50,000+</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Tell Us About Your Project *</label>
+                  <textarea 
+                    rows={5} 
+                    required
+                    placeholder="What are your goals? What challenges are you facing? What services are you interested in?"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none text-white placeholder-slate-500"
+                  ></textarea>
+                </div>
+                <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition shadow-lg shadow-blue-500/20">
+                  Send Message →
+                </button>
+              </form>
+            </div>
+
+            {/* Contact Info & Quick Options */}
+            <div className="space-y-6">
+              {/* Quick Contact Options */}
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8">
+                <h3 className="text-2xl font-bold text-white mb-6">Quick Contact Options</h3>
+                <div className="space-y-4">
+                  <a href="https://wa.me/15550123456" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-4 bg-green-600/10 border border-green-500/30 rounded-lg hover:bg-green-600/20 transition group">
+                    <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                      💬
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-bold text-white">Chat on WhatsApp</div>
+                      <div className="text-sm text-slate-400">Quick response within 1 hour</div>
+                    </div>
+                    <span className="text-green-400 group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+
+                  <a href="tel:+15550123456" className="flex items-center gap-4 p-4 bg-blue-600/10 border border-blue-500/30 rounded-lg hover:bg-blue-600/20 transition group">
+                    <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                      📞
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-bold text-white">Call Us Directly</div>
+                      <div className="text-sm text-slate-400">(555) 012-3456</div>
+                    </div>
+                    <span className="text-blue-400 group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+
+                  <a href="mailto:hello@iffimedia.com" className="flex items-center gap-4 p-4 bg-purple-600/10 border border-purple-500/30 rounded-lg hover:bg-purple-600/20 transition group">
+                    <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                      📧
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-bold text-white">Email Us</div>
+                      <div className="text-sm text-slate-400">hello@iffimedia.com</div>
+                    </div>
+                    <span className="text-purple-400 group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Message</label>
-                <textarea rows={6} className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none text-white placeholder-slate-500"></textarea>
+
+              {/* Why Choose Us */}
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8">
+                <h3 className="text-xl font-bold text-white mb-4">Why Work With Us?</h3>
+                <ul className="space-y-3 text-sm">
+                  <li className="flex items-start gap-3">
+                    <span className="text-blue-400 text-lg mt-0.5">✓</span>
+                    <span className="text-slate-300">Free 30-minute consultation call</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-blue-400 text-lg mt-0.5">✓</span>
+                    <span className="text-slate-300">No long-term contracts required</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-blue-400 text-lg mt-0.5">✓</span>
+                    <span className="text-slate-300">Transparent pricing & reporting</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-blue-400 text-lg mt-0.5">✓</span>
+                    <span className="text-slate-300">Response within 24 hours guaranteed</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-blue-400 text-lg mt-0.5">✓</span>
+                    <span className="text-slate-300">Work with senior strategists, not juniors</span>
+                  </li>
+                </ul>
               </div>
-              <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition shadow-lg shadow-blue-500/20">
-                Send Message
-              </button>
-            </form>
+
+              {/* Response Time */}
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-center">
+                <div className="text-3xl font-bold text-white mb-2">⚡</div>
+                <div className="text-white font-bold mb-1">Average Response Time</div>
+                <div className="text-blue-100 text-sm">Less than 2 hours during business hours</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
