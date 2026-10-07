@@ -52,7 +52,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-3 group cursor-pointer">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-300 group-hover:scale-110">
+              <div className="w-12 h-12 rounded-xl bg-slate-950 border border-blue-500/20 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300 group-hover:scale-110">
                 <img src="https://image.qwenlm.ai/generated-images/9610a238-b26a-49aa-bf7a-d4e50f48dbc7/_result.png" alt="Lama" className="w-9 h-9 object-contain" />
               </div>
               <div>
@@ -138,7 +138,7 @@ function App() {
             </p>
 
             <p className="text-lg text-slate-500 mb-12 max-w-2xl mx-auto animate-fade-in-up stagger-3">
-              Founded by <span className="text-blue-400 font-semibold">Irfan Abdul Majid</span> • Serving elite clients nationwide
+              Founded by <a href="https://ae.linkedin.com/in/iambk12" target="_blank" rel="noopener noreferrer" className="text-blue-400 font-semibold hover:text-cyan-400 transition-colors underline decoration-blue-400/30 hover:decoration-cyan-400">Irfan Abdul Majid</a> • Serving elite clients nationwide
             </p>
 
             {/* CTA Buttons */}
@@ -509,11 +509,13 @@ function App() {
                         Your Website URL <span className="text-slate-500 font-normal">(Optional)</span>
                       </label>
                       <input 
-                        type="url" 
-                        placeholder="https://yourwebsite.com"
+                        type="text" 
+                        placeholder="iffi.com or https://yourwebsite.com"
+                        pattern="^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$"
+                        title="Enter a valid website URL (e.g., iffi.com or https://yourwebsite.com)"
                         className="w-full px-5 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-white placeholder-slate-500 transition-all" 
                       />
-                      <p className="text-xs text-slate-500 mt-2">So we can review your current marketing before our call</p>
+                      <p className="text-xs text-slate-500 mt-2">So we can review your current marketing before our call (e.g., iffi.com)</p>
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-slate-300 mb-3">
@@ -554,7 +556,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
+              <div className="w-12 h-12 rounded-xl bg-slate-950 border border-blue-500/20 flex items-center justify-center shadow-lg shadow-blue-500/20">
                 <img src="https://image.qwenlm.ai/generated-images/9610a238-b26a-49aa-bf7a-d4e50f48dbc7/_result.png" alt="Lama" className="w-9 h-9 object-contain" />
               </div>
               <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -562,7 +564,7 @@ function App() {
               </div>
             </div>
             <p className="text-slate-400 mb-6 text-lg">
-              Founded by <span className="text-blue-400 font-semibold">Irfan Abdul Majid</span>
+              Founded by <a href="https://ae.linkedin.com/in/iambk12" target="_blank" rel="noopener noreferrer" className="text-blue-400 font-semibold hover:text-cyan-400 transition-colors underline decoration-blue-400/30 hover:decoration-cyan-400">Irfan Abdul Majid</a>
             </p>
             <p className="text-slate-500 text-sm">
               © 2026 lamaMedia. All rights reserved. Premium Digital Marketing Agency.
