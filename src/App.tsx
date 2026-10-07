@@ -3,10 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
 
-  // Mouse tracking for hero section
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
@@ -18,20 +16,10 @@ function App() {
       }
     };
 
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Intersection Observer for scroll animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -51,29 +39,48 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 z-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden">
+      {/* Animated background orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl animate-pulse" />
+      </div>
+
+      {/* Premium Navigation */}
+      <nav className="fixed top-0 w-full bg-slate-950/80 backdrop-blur-xl border-b border-amber-500/10 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="text-2xl font-bold">
-              <span className="text-blue-400">iffi</span>
-              <span className="text-white">Media</span>
+            <div className="flex items-center gap-3 group cursor-pointer">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:shadow-amber-500/50 transition-all duration-300 group-hover:scale-110">
+                <img src="https://image.qwenlm.ai/generated-images/4d590224-14d9-4692-9f90-4049a88e55c2/_result.png" alt="Lama" className="w-8 h-8 object-contain" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">
+                  lamaMedia
+                </div>
+              </div>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#services" className="text-slate-300 hover:text-white transition font-medium">Services</a>
-              <a href="#results" className="text-slate-300 hover:text-white transition font-medium">Results</a>
-              <a href="#pricing" className="text-slate-300 hover:text-white transition font-medium">Pricing</a>
-              <a href="#career" className="text-slate-300 hover:text-white transition font-medium">Career</a>
-              <a href="#contact" className="px-6 py-2.5 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition">
-                Contact
+              {['Services', 'Results', 'Pricing', 'Career', 'Contact'].map((item) => (
+                <a 
+                  key={item} 
+                  href={`#${item.toLowerCase()}`} 
+                  className="relative text-slate-300 hover:text-amber-400 transition font-medium group"
+                >
+                  {item}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+              ))}
+              <a href="#contact" className="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 rounded-lg font-bold hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105">
+                Get Started
               </a>
             </div>
 
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-white"
+              className="md:hidden text-amber-400"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -83,96 +90,109 @@ function App() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden bg-slate-800 border-t border-slate-700">
-            <div className="px-4 py-4 space-y-3">
-              <a href="#services" className="block text-slate-300 hover:text-white font-medium py-2">Services</a>
-              <a href="#results" className="block text-slate-300 hover:text-white font-medium py-2">Results</a>
-              <a href="#pricing" className="block text-slate-300 hover:text-white font-medium py-2">Pricing</a>
-              <a href="#career" className="block text-slate-300 hover:text-white font-medium py-2">Career</a>
-              <a href="#contact" className="block text-slate-300 hover:text-white font-medium py-2">Contact</a>
+          <div className="md:hidden bg-slate-950/95 backdrop-blur-xl border-t border-amber-500/10">
+            <div className="px-4 py-6 space-y-3">
+              {['Services', 'Results', 'Pricing', 'Career', 'Contact'].map((item) => (
+                <a key={item} href={`#${item.toLowerCase()}`} className="block text-slate-300 hover:text-amber-400 font-medium py-2">
+                  {item}
+                </a>
+              ))}
             </div>
           </div>
         )}
       </nav>
 
-      {/* Hero Section */}
-      <header ref={heroRef} className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Premium Hero Section */}
+      <header ref={heroRef} className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative">
         {/* Mouse tracking gradient */}
         <div 
-          className="absolute inset-0 opacity-50 pointer-events-none transition-all duration-300"
+          className="absolute inset-0 opacity-30 pointer-events-none transition-all duration-300"
           style={{
-            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 40%)`
+            background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(251, 191, 36, 0.15), transparent 40%)`
           }}
         />
         
-        {/* Floating background elements */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-        
         <div className="max-w-7xl mx-auto relative">
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-12 md:p-20 hover-glow transition-all duration-300">
-            <div className="text-center">
-              <div className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6 animate-fade-in-up">
-                <span className="text-sm font-medium text-blue-400">🏆 Trusted by 47+ Businesses Across USA</span>
+          <div className="text-center">
+            {/* Premium badge */}
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500/10 to-amber-600/10 border border-amber-500/20 rounded-full mb-8 animate-fade-in-up backdrop-blur-sm">
+              <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
+              <span className="text-sm font-semibold text-amber-400">🏆 Trusted by 47+ Premium Brands Across USA</span>
+            </div>
+
+            {/* Main heading */}
+            <h1 className="text-6xl md:text-8xl font-black mb-8 leading-tight animate-fade-in-up stagger-1">
+              <span className="block text-white">Digital Marketing</span>
+              <span className="block bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent mt-2">
+                That Delivers Results
+              </span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-xl md:text-2xl text-slate-400 mb-6 max-w-4xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
+              <span className="text-white font-semibold">lamaMedia</span> is a premium digital marketing agency specializing in{' '}
+              <span className="text-amber-400 font-semibold">SEO services</span>,{' '}
+              <span className="text-amber-400 font-semibold">PPC advertising</span>,{' '}
+              <span className="text-amber-400 font-semibold">social media marketing</span>, and{' '}
+              <span className="text-amber-400 font-semibold">conversion optimization</span>.
+            </p>
+
+            <p className="text-lg text-slate-500 mb-12 max-w-2xl mx-auto animate-fade-in-up stagger-3">
+              Founded by <span className="text-amber-400 font-semibold">Irfan Abdul Majid</span> • Serving elite clients nationwide
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12 animate-fade-in-up stagger-4">
+              <a href="#contact" className="group relative px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105">
+                <span className="relative z-10">Get Free Marketing Audit →</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 rounded-xl blur opacity-50 group-hover:opacity-100 transition-opacity"></div>
+              </a>
+              <a href="#results" className="px-10 py-5 bg-slate-800/50 backdrop-blur-sm border-2 border-amber-500/30 text-white rounded-xl font-bold text-lg hover:bg-slate-800 hover:border-amber-500/50 transition-all duration-300 hover:scale-105">
+                View Case Studies
+              </a>
+            </div>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap justify-center gap-8 text-sm text-slate-400 animate-fade-in-up stagger-5">
+              <div className="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                <span className="text-amber-400">✓</span>
+                <span>No Long-Term Contracts</span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-fade-in-up stagger-1">
-                <span className="text-white">Digital Marketing Agency</span>
-                <br />
-                <span className="text-blue-400">That Delivers Results</span>
-              </h1>
-              <p className="text-xl text-slate-400 mb-6 max-w-3xl mx-auto animate-fade-in-up stagger-2">
-                iffiMedia is a full-service digital marketing agency specializing in <strong className="text-white">SEO services</strong>, <strong className="text-white">PPC advertising</strong>, <strong className="text-white">social media marketing</strong>, and <strong className="text-white">conversion optimization</strong>. We help brands scale revenue through data-driven strategies.
-              </p>
-              <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto animate-fade-in-up stagger-3">
-                Founded by <strong className="text-blue-400">Irfan Abdul Majid</strong> • Serving clients nationwide
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 animate-fade-in-up stagger-4">
-                <a href="#contact" className="px-8 py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/40 transition-all duration-300 shadow-lg shadow-blue-500/20">
-                  Get Free Marketing Audit
-                </a>
-                <a href="#results" className="px-8 py-4 bg-slate-700 text-white rounded-lg font-semibold hover:bg-slate-600 hover:scale-105 transition-all duration-300">
-                  View Case Studies
-                </a>
+              <div className="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                <span className="text-amber-400">✓</span>
+                <span>Transparent Reporting</span>
               </div>
-              <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400 animate-fade-in-up stagger-5">
-                <span className="hover:text-blue-400 transition-colors">✓ No Long-Term Contracts</span>
-                <span className="hover:text-blue-400 transition-colors">✓ Transparent Reporting</span>
-                <span className="hover:text-blue-400 transition-colors">✓ ROI-Focused</span>
-                <span className="hover:text-blue-400 transition-colors">✓ 24/7 Support</span>
+              <div className="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                <span className="text-amber-400">✓</span>
+                <span>ROI-Focused</span>
+              </div>
+              <div className="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                <span className="text-amber-400">✓</span>
+                <span>24/7 Premium Support</span>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Stats */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      {/* Premium Stats Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: '47+', label: 'Clients Served' },
-              { value: '$3.2M+', label: 'Ad Spend Managed' },
-              { value: '150%', label: 'Avg. ROAS' },
-              { value: '5+', label: 'Years Experience' }
+              { value: '47+', label: 'Premium Clients', icon: '👥' },
+              { value: '$3.2M+', label: 'Ad Spend Managed', icon: '💰' },
+              { value: '150%', label: 'Average ROAS', icon: '📈' },
+              { value: '5+', label: 'Years Excellence', icon: '⭐' }
             ].map((stat, idx) => (
-              <article key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 text-center hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
-                <div className="text-4xl font-bold text-blue-400 mb-2">{stat.value}</div>
-                <div className="text-slate-400 font-medium">{stat.label}</div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trusted By Section */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 border-y border-slate-700">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-center text-slate-500 text-sm mb-8 uppercase tracking-wider">Trusted by Leading Brands</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-            {['TechFlow', 'Pacific Coast', 'Summit Health', 'Urban Style', 'Luxe Home', 'CloudSync'].map((brand, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-slate-500 font-bold text-lg hover:text-blue-400 transition cursor-pointer">
-                  {brand}
+              <div key={idx} className="scroll-animate group relative opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-amber-500/20 p-8 text-center hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2">
+                  <div className="text-4xl mb-3">{stat.icon}</div>
+                  <div className="text-5xl font-black bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-slate-400 font-medium">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -180,68 +200,39 @@ function App() {
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* Premium Services Section */}
+      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Digital Marketing Services</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              Comprehensive SEO, PPC, social media, and email marketing solutions tailored to your business goals
+            <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
+              Premium <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">Services</span>
+            </h2>
+            <p className="scroll-animate text-xl text-slate-400 max-w-3xl mx-auto opacity-0 stagger-1">
+              Elite digital marketing solutions crafted for ambitious brands
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: '🎯', title: 'Paid Ads (PPC)', desc: 'Meta Ads, Google Ads, TikTok Ads focused on direct ROI', features: ['Campaign Strategy', 'Audience Targeting', 'Performance Tracking'] },
-              { icon: '🔍', title: 'SEO & Content', desc: 'On-page optimization and content strategy for organic growth', features: ['Technical SEO Audits', 'Keyword Research', 'Local SEO'] },
-              { icon: '📱', title: 'Social Media', desc: 'Strategy and content creation for brand building', features: ['Content Calendar', 'Short-form Video', 'Community Management'] },
-              { icon: '✉️', title: 'Email Marketing', desc: 'Klaviyo/Mailchimp setups and retention marketing', features: ['Automation Flows', 'Lead Nurture', 'Retention Campaigns'] }
+              { icon: '🎯', title: 'Paid Ads (PPC)', desc: 'Meta Ads, Google Ads, TikTok Ads with laser focus on ROI', features: ['Campaign Strategy', 'Audience Targeting', 'Performance Tracking'] },
+              { icon: '🔍', title: 'SEO & Content', desc: 'Dominate search rankings with data-driven optimization', features: ['Technical SEO Audits', 'Keyword Research', 'Local SEO'] },
+              { icon: '📱', title: 'Social Media', desc: 'Build brand authority with strategic content creation', features: ['Content Calendar', 'Short-form Video', 'Community Management'] },
+              { icon: '✉️', title: 'Email Marketing', desc: 'Maximize LTV with sophisticated automation', features: ['Automation Flows', 'Lead Nurture', 'Retention Campaigns'] }
             ].map((service, idx) => (
-              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-6 hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
-                <div className="text-5xl mb-4 hover-scale transition-transform duration-300">{service.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                <p className="text-slate-400 text-sm mb-4">{service.desc}</p>
-                <ul className="text-sm text-slate-300 space-y-2">
-                  {service.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-                      <span className="text-blue-400">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Results */}
-      <section id="results" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Proven Results</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              Real campaigns, real numbers, real growth
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { metric: '4.8x ROAS', title: 'E-commerce Fashion Brand', desc: 'Scaled Meta Ads from $5K to $25K monthly while maintaining profitability', results: ['Revenue: $120K/mo', 'CPA reduced by 34%'] },
-              { metric: '+312% Traffic', title: 'Local Dental Practice', desc: 'Complete local SEO overhaul driving organic patient acquisition', results: ['28 Page 1 rankings', '+45 new patients/mo'] },
-              { metric: '6.2x ROAS', title: 'SaaS Startup', desc: 'Full-funnel Google Ads strategy for B2B SaaS product', results: ['MRR: +$45K in 90 days', 'CAC: $180 (down from $450)'] }
-            ].map((result, idx) => (
-              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.15}s` }}>
-                <div className="text-3xl font-bold text-blue-400 mb-3 hover-scale transition-transform duration-300">{result.metric}</div>
-                <h3 className="text-xl font-bold text-white mb-3">{result.title}</h3>
-                <p className="text-slate-400 text-sm mb-4">{result.desc}</p>
-                <div className="text-sm text-slate-300 space-y-2">
-                  {result.results.map((res, rIdx) => (
-                    <div key={rIdx} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-                      <span className="text-blue-400">✓</span>
-                      {res}
-                    </div>
-                  ))}
+              <div key={idx} className="scroll-animate group relative opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-amber-500/20 p-8 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2 h-full">
+                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">{service.icon}</div>
+                  <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
+                  <p className="text-slate-400 text-sm mb-6 leading-relaxed">{service.desc}</p>
+                  <ul className="text-sm text-slate-300 space-y-3">
+                    {service.features.map((feature, fIdx) => (
+                      <li key={fIdx} className="flex items-center gap-3 hover:text-amber-400 transition-colors">
+                        <span className="text-amber-400 text-lg">✓</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
@@ -249,62 +240,63 @@ function App() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* Premium Results Section */}
+      <section id="results" className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Flexible Pricing</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              Custom quotes based on your specific needs and goals
+            <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
+              Proven <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">Results</span>
+            </h2>
+            <p className="scroll-animate text-xl text-slate-400 max-w-3xl mx-auto opacity-0 stagger-1">
+              Real campaigns, extraordinary outcomes
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: 'Project-Based', price: '$500 – $3,000', note: 'Depends on scope & complexity', features: ['Marketing audit & strategy', 'Campaign setup', '2-4 weeks support', 'Detailed report'], popular: false },
-              { name: 'Monthly Retainer', price: '$1,500 – $5,000+', note: 'Per month based on workload', features: ['Full campaign management', 'Weekly optimization calls', 'Content creation', 'Priority support'], popular: true },
-              { name: 'Advisory', price: '$75 – $200', note: 'Per hour consultation', features: ['Strategy consultation', 'Campaign review', 'Team training', 'Flexible scheduling'], popular: false }
-            ].map((plan, idx) => (
-              <div key={idx} className={`scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border-2 ${plan.popular ? 'border-blue-500' : 'border-slate-700'} p-8 relative hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0 ${plan.popular ? 'animate-pulse-glow' : ''}`} style={{ animationDelay: `${idx * 0.15}s` }}>
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-500 text-white text-xs font-bold rounded-full animate-pulse">
-                    POPULAR
+              { metric: '4.8x ROAS', title: 'E-commerce Fashion Brand', desc: 'Scaled Meta Ads from $5K to $25K monthly with exceptional profitability', results: ['Revenue: $120K/mo', 'CPA reduced by 34%'] },
+              { metric: '+312% Traffic', title: 'Local Dental Practice', desc: 'Complete local SEO overhaul driving massive organic patient acquisition', results: ['28 Page 1 rankings', '+45 new patients/mo'] },
+              { metric: '6.2x ROAS', title: 'SaaS Startup', desc: 'Full-funnel Google Ads strategy for B2B SaaS product launch', results: ['MRR: +$45K in 90 days', 'CAC: $180 (down from $450)'] }
+            ].map((result, idx) => (
+              <div key={idx} className="scroll-animate group relative opacity-0" style={{ animationDelay: `${idx * 0.15}s` }}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-amber-500/20 p-8 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2 h-full">
+                  <div className="text-4xl font-black bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent mb-4 group-hover:scale-105 transition-transform duration-300">
+                    {result.metric}
                   </div>
-                )}
-                <h3 className="text-2xl font-bold text-white mb-3">{plan.name}</h3>
-                <div className="text-4xl font-bold text-blue-400 mb-2 hover-scale transition-transform duration-300">{plan.price}</div>
-                <p className="text-slate-400 text-sm mb-8">{plan.note}</p>
-                <ul className="space-y-3 text-sm text-slate-300 mb-8">
-                  {plan.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-3 hover:text-blue-400 transition-colors">
-                      <span className="text-blue-400 text-lg">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <a href="#contact" className={`block w-full py-4 rounded-lg text-center font-semibold transition-all duration-300 hover:scale-105 ${plan.popular ? 'bg-blue-500 text-white hover:bg-blue-600 hover:shadow-2xl hover:shadow-blue-500/40' : 'bg-slate-700 text-white hover:bg-slate-600'}`}>
-                  {plan.popular ? 'Get Custom Quote' : plan.name === 'Advisory' ? 'Book Session' : 'Request Quote'}
-                </a>
+                  <h3 className="text-2xl font-bold text-white mb-4">{result.title}</h3>
+                  <p className="text-slate-400 text-sm mb-6 leading-relaxed">{result.desc}</p>
+                  <div className="text-sm text-slate-300 space-y-2">
+                    {result.results.map((res, rIdx) => (
+                      <div key={rIdx} className="flex items-center gap-3 hover:text-amber-400 transition-colors">
+                        <span className="text-amber-400">✓</span>
+                        <span>{res}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* Premium Testimonials Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+            <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
+              What Our <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">Clients Say</span>
+            </h2>
+            <p className="scroll-animate text-xl text-slate-400 max-w-3xl mx-auto opacity-0 stagger-1">
               Trusted by leading brands across the USA
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                quote: "iffiMedia transformed our Facebook ad strategy completely. We went from burning cash to a predictable 4.8x ROAS in just 8 weeks. Their data-driven approach is unmatched.",
+                quote: "lamaMedia transformed our Facebook ad strategy completely. We went from burning cash to a predictable 4.8x ROAS in just 8 weeks. Their data-driven approach is unmatched.",
                 name: "Sarah Mitchell",
                 title: "Marketing Director",
                 company: "TechFlow Solutions",
@@ -325,7 +317,7 @@ function App() {
                 location: "Denver, CO"
               },
               {
-                quote: "We hired iffiMedia for our TikTok advertising and the results were incredible. 12M+ views in the first month and our brand awareness skyrocketed. Highly recommend.",
+                quote: "We hired lamaMedia for our TikTok advertising and the results were incredible. 12M+ views in the first month and our brand awareness skyrocketed. Highly recommend.",
                 name: "David Thompson",
                 title: "Brand Manager",
                 company: "Urban Style Co.",
@@ -339,25 +331,28 @@ function App() {
                 location: "Chicago, IL"
               },
               {
-                quote: "Working with iffiMedia was the best decision we made. They scaled our SaaS from $50K to $400K MRR in 6 months with a full-funnel Google Ads strategy.",
+                quote: "Working with lamaMedia was the best decision we made. They scaled our SaaS from $50K to $400K MRR in 6 months with a full-funnel Google Ads strategy.",
                 name: "Robert Kim",
                 title: "Founder",
                 company: "CloudSync Platform",
                 location: "Seattle, WA"
               }
             ].map((testimonial, idx) => (
-              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-xl hover-scale transition-transform duration-300">★</span>
-                  ))}
-                </div>
-                <p className="text-slate-300 text-sm mb-6 leading-relaxed">"{testimonial.quote}"</p>
-                <div className="border-t border-slate-700 pt-4">
-                  <div className="font-bold text-white">{testimonial.name}</div>
-                  <div className="text-sm text-slate-400">{testimonial.title}</div>
-                  <div className="text-sm text-blue-400 font-medium">{testimonial.company}</div>
-                  <div className="text-xs text-slate-500">{testimonial.location}</div>
+              <div key={idx} className="scroll-animate group relative opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-amber-500/20 p-8 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2 h-full">
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-amber-400 text-2xl">★</span>
+                    ))}
+                  </div>
+                  <p className="text-slate-300 text-sm mb-6 leading-relaxed italic">"{testimonial.quote}"</p>
+                  <div className="border-t border-amber-500/20 pt-6">
+                    <div className="font-bold text-white text-lg">{testimonial.name}</div>
+                    <div className="text-sm text-slate-400 mt-1">{testimonial.title}</div>
+                    <div className="text-sm text-amber-400 font-semibold mt-1">{testimonial.company}</div>
+                    <div className="text-xs text-slate-500 mt-1">{testimonial.location}</div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -365,315 +360,213 @@ function App() {
         </div>
       </section>
 
-      {/* Career */}
-      <section id="career" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
+      {/* Premium Pricing Section */}
+      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Join Our Team</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              We're looking for talented marketers to grow with us
+            <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
+              Flexible <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">Pricing</span>
+            </h2>
+            <p className="scroll-animate text-xl text-slate-400 max-w-3xl mx-auto opacity-0 stagger-1">
+              Premium solutions tailored to your unique needs
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
-              { title: 'Digital Marketing Specialist', type: 'Full-time / Remote • 2-4 years experience', desc: 'Join our team and help clients scale their businesses through data-driven strategies.' },
-              { title: 'Paid Ads Manager', type: 'Full-time / Remote • 3-5 years experience', desc: 'Manage high-budget campaigns across multiple platforms for our clients.' }
+              { name: 'Project-Based', price: '$500 – $3,000', note: 'Depends on scope & complexity', features: ['Marketing audit & strategy', 'Campaign setup', '2-4 weeks support', 'Detailed report'], popular: false },
+              { name: 'Monthly Retainer', price: '$1,500 – $5,000+', note: 'Per month based on workload', features: ['Full campaign management', 'Weekly optimization calls', 'Content creation', 'Priority support'], popular: true },
+              { name: 'Advisory', price: '$75 – $200', note: 'Per hour consultation', features: ['Strategy consultation', 'Campaign review', 'Team training', 'Flexible scheduling'], popular: false }
+            ].map((plan, idx) => (
+              <div key={idx} className={`scroll-animate group relative opacity-0 ${plan.popular ? 'md:-mt-4 md:mb-4' : ''}`} style={{ animationDelay: `${idx * 0.15}s` }}>
+                {plan.popular && (
+                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl blur opacity-50 animate-pulse"></div>
+                )}
+                <div className={`relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border-2 ${plan.popular ? 'border-amber-500' : 'border-amber-500/20 group-hover:border-amber-500/50'} p-10 transition-all duration-300 hover:-translate-y-2 h-full`}>
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 text-sm font-bold rounded-full shadow-lg">
+                      MOST POPULAR
+                    </div>
+                  )}
+                  <h3 className="text-3xl font-bold text-white mb-4">{plan.name}</h3>
+                  <div className="text-5xl font-black bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent mb-3 group-hover:scale-105 transition-transform duration-300">
+                    {plan.price}
+                  </div>
+                  <p className="text-slate-400 text-sm mb-10">{plan.note}</p>
+                  <ul className="space-y-4 text-sm text-slate-300 mb-10">
+                    {plan.features.map((feature, fIdx) => (
+                      <li key={fIdx} className="flex items-center gap-3 hover:text-amber-400 transition-colors">
+                        <span className="text-amber-400 text-xl">✓</span>
+                        <span className="text-lg">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a href="#contact" className={`block w-full py-5 rounded-xl text-center font-bold text-lg transition-all duration-300 hover:scale-105 ${plan.popular ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 hover:shadow-2xl hover:shadow-amber-500/50' : 'bg-slate-800 text-white hover:bg-slate-700'}`}>
+                    {plan.popular ? 'Get Custom Quote' : plan.name === 'Advisory' ? 'Book Session' : 'Request Quote'}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Premium Career Section */}
+      <section id="career" className="py-20 px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
+              Join Our <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">Elite Team</span>
+            </h2>
+            <p className="scroll-animate text-xl text-slate-400 max-w-3xl mx-auto opacity-0 stagger-1">
+              We're looking for exceptional talent to grow with us
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {[
+              { title: 'Digital Marketing Specialist', type: 'Full-time / Remote • 2-4 years experience', desc: 'Join our elite team and help premium clients scale their businesses through data-driven strategies.' },
+              { title: 'Paid Ads Manager', type: 'Full-time / Remote • 3-5 years experience', desc: 'Manage high-budget campaigns across multiple platforms for our distinguished clients.' }
             ].map((job, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 transition">
-                <h3 className="text-2xl font-bold text-white mb-3">{job.title}</h3>
-                <p className="text-blue-400 text-sm font-medium mb-4">{job.type}</p>
-                <p className="text-slate-400 text-sm mb-6">{job.desc}</p>
-                <a href="#contact" className="inline-block px-8 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition">
-                  Apply Now
-                </a>
+              <div key={idx} className="scroll-animate group relative opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-amber-500/20 p-10 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2 h-full">
+                  <h3 className="text-3xl font-bold text-white mb-4">{job.title}</h3>
+                  <p className="text-amber-400 text-sm font-semibold mb-6">{job.type}</p>
+                  <p className="text-slate-400 text-base mb-8 leading-relaxed">{job.desc}</p>
+                  <a href="#contact" className="inline-block px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 rounded-xl font-bold hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105">
+                    Apply Now →
+                  </a>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Get In Touch</h2>
-            <p className="text-xl text-slate-400">
-              Ready to scale your business? Let's talk.
-            </p>
-          </div>
-
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 md:p-10">
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">Send Us a Message</h3>
-            <form className="space-y-5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Full Name *</label>
-                  <input 
-                    type="text" 
-                    required
-                    placeholder="John Smith"
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Email Address *</label>
-                  <input 
-                    type="email" 
-                    required
-                    placeholder="john@company.com"
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Phone Number</label>
-                  <input 
-                    type="tel" 
-                    placeholder="+1 (555) 000-0000"
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    WhatsApp Number <span className="text-slate-500">(Optional)</span>
-                  </label>
-                  <input 
-                    type="tel" 
-                    placeholder="+1 (555) 000-0000"
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
-                  />
-                  <p className="text-xs text-slate-500 mt-1">For quick communication via WhatsApp</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Your Website URL <span className="text-slate-500">(Optional)</span>
-                  </label>
-                  <input 
-                    type="url" 
-                    placeholder="https://yourwebsite.com"
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white placeholder-slate-500" 
-                  />
-                  <p className="text-xs text-slate-500 mt-1">So we can review your current marketing before our call</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Monthly Marketing Budget <span className="text-slate-500">(Optional)</span>
-                  </label>
-                  <select className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-white">
-                    <option value="">Select budget range</option>
-                    <option value="under-2k">Under $2,000</option>
-                    <option value="2k-5k">$2,000 - $5,000</option>
-                    <option value="5k-15k">$5,000 - $15,000</option>
-                    <option value="15k-50k">$15,000 - $50,000</option>
-                    <option value="50k+">$50,000+</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Tell Us About Your Project *</label>
-                <textarea 
-                  rows={5} 
-                  required
-                  placeholder="What are your goals? What challenges are you facing? What services are you interested in?"
-                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none text-white placeholder-slate-500"
-                ></textarea>
-              </div>
-              <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition shadow-lg shadow-blue-500/20">
-                Send Message →
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Proven Process</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              A systematic approach to delivering measurable results
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { step: '01', title: 'Discovery & Audit', desc: 'Deep dive into your business, competitors, and current marketing performance' },
-              { step: '02', title: 'Strategy Development', desc: 'Custom roadmap tailored to your goals, budget, and timeline' },
-              { step: '03', title: 'Execution & Launch', desc: 'Implement campaigns with precision across all chosen channels' },
-              { step: '04', title: 'Optimize & Scale', desc: 'Continuous testing, optimization, and scaling of winning strategies' }
-            ].map((item, idx) => (
-              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 hover-lift hover-glow transition-all duration-300 opacity-0 relative group" style={{ animationDelay: `${idx * 0.1}s` }}>
-                <div className="text-6xl font-bold text-blue-500/20 absolute top-4 right-4 group-hover:text-blue-500/40 transition-colors duration-300">{item.step}</div>
-                <h3 className="text-xl font-bold text-white mb-3 relative z-10">{item.title}</h3>
-                <p className="text-slate-400 text-sm relative z-10">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Industries Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Industries We Serve</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              Specialized expertise across diverse sectors
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {['E-commerce', 'SaaS', 'Healthcare', 'Real Estate', 'Finance', 'Education', 'Restaurant', 'Fitness', 'Legal', 'Technology', 'Retail', 'Manufacturing'].map((industry, idx) => (
-              <div key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-700 p-4 text-center hover:border-blue-500/50 hover-lift hover-scale transition-all duration-300 opacity-0" style={{ animationDelay: `${idx * 0.05}s` }}>
-                <div className="text-white font-medium text-sm">{industry}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* Premium Contact Section */}
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-slate-400">
-              Everything you need to know about working with iffiMedia
+            <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
+              Get In <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">Touch</span>
+            </h2>
+            <p className="scroll-animate text-xl text-slate-400 opacity-0 stagger-1">
+              Ready to elevate your brand? Let's talk.
             </p>
           </div>
 
-          <div className="space-y-4">
-            {[
-              { q: 'How long does it take to see results from digital marketing?', a: 'Results vary by channel. PPC campaigns can show results within days, while SEO typically takes 3-6 months for significant organic growth. We set clear expectations and milestones from day one.' },
-              { q: 'What is your minimum contract length?', a: 'We offer flexible engagement models. Project-based work has no commitment, while monthly retainers typically start at 3 months to allow sufficient time for optimization and results.' },
-              { q: 'Do you work with small businesses or only large companies?', a: 'We work with businesses of all sizes. Our pricing scales based on your needs and budget. Whether you\'re a startup or established enterprise, we have solutions that fit.' },
-              { q: 'What makes iffiMedia different from other agencies?', a: 'Our data-driven approach, transparent reporting, and focus on ROI set us apart. We don\'t just run campaigns; we build sustainable growth systems. Plus, you work directly with senior strategists, not junior account managers.' },
-              { q: 'How do you measure success?', a: 'We establish KPIs aligned with your business goals during onboarding. This could be ROAS, conversion rate, organic traffic, lead generation, or revenue growth. We provide detailed monthly reports with actionable insights.' },
-              { q: 'Can I cancel my retainer at any time?', a: 'Yes, after the initial commitment period, you can cancel with 30 days notice. We believe in earning your business every month through results, not contracts.' }
-            ].map((faq, idx) => (
-              <details key={idx} className="scroll-animate bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-6 hover:border-blue-500/50 hover-glow transition-all duration-300 opacity-0 group" style={{ animationDelay: `${idx * 0.1}s` }}>
-                <summary className="text-lg font-bold text-white cursor-pointer list-none flex justify-between items-center">
-                  {faq.q}
-                  <span className="text-blue-400 text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
-                </summary>
-                <p className="text-slate-400 mt-4 text-sm leading-relaxed">{faq.a}</p>
-              </details>
-            ))}
+          <div className="scroll-animate opacity-0 stagger-2">
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl blur opacity-30"></div>
+              <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-amber-500/20 p-10 md:p-12">
+                <h3 className="text-3xl font-bold text-white mb-10 text-center">Send Us a Message</h3>
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-300 mb-3">Full Name *</label>
+                      <input 
+                        type="text" 
+                        required
+                        placeholder="John Smith"
+                        className="w-full px-5 py-4 bg-slate-800/50 border border-amber-500/20 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-white placeholder-slate-500 transition-all" 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-300 mb-3">Email Address *</label>
+                      <input 
+                        type="email" 
+                        required
+                        placeholder="john@company.com"
+                        className="w-full px-5 py-4 bg-slate-800/50 border border-amber-500/20 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-white placeholder-slate-500 transition-all" 
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-300 mb-3">Phone Number</label>
+                      <input 
+                        type="tel" 
+                        placeholder="+1 (555) 000-0000"
+                        className="w-full px-5 py-4 bg-slate-800/50 border border-amber-500/20 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-white placeholder-slate-500 transition-all" 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-300 mb-3">
+                        WhatsApp Number <span className="text-slate-500 font-normal">(Optional)</span>
+                      </label>
+                      <input 
+                        type="tel" 
+                        placeholder="+1 (555) 000-0000"
+                        className="w-full px-5 py-4 bg-slate-800/50 border border-amber-500/20 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-white placeholder-slate-500 transition-all" 
+                      />
+                      <p className="text-xs text-slate-500 mt-2">For quick communication via WhatsApp</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-300 mb-3">
+                        Your Website URL <span className="text-slate-500 font-normal">(Optional)</span>
+                      </label>
+                      <input 
+                        type="url" 
+                        placeholder="https://yourwebsite.com"
+                        className="w-full px-5 py-4 bg-slate-800/50 border border-amber-500/20 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-white placeholder-slate-500 transition-all" 
+                      />
+                      <p className="text-xs text-slate-500 mt-2">So we can review your current marketing before our call</p>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-300 mb-3">
+                        Monthly Marketing Budget <span className="text-slate-500 font-normal">(Optional)</span>
+                      </label>
+                      <select className="w-full px-5 py-4 bg-slate-800/50 border border-amber-500/20 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-white transition-all">
+                        <option value="">Select budget range</option>
+                        <option value="under-2k">Under $2,000</option>
+                        <option value="2k-5k">$2,000 - $5,000</option>
+                        <option value="5k-15k">$5,000 - $15,000</option>
+                        <option value="15k-50k">$15,000 - $50,000</option>
+                        <option value="50k+">$50,000+</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-300 mb-3">Tell Us About Your Project *</label>
+                    <textarea 
+                      rows={6} 
+                      required
+                      placeholder="What are your goals? What challenges are you facing? What services are you interested in?"
+                      className="w-full px-5 py-4 bg-slate-800/50 border border-amber-500/20 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 resize-none text-white placeholder-slate-500 transition-all"
+                    ></textarea>
+                  </div>
+                  <button type="submit" className="group relative w-full py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105">
+                    <span className="relative z-10">Send Message →</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 rounded-xl blur opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
-        {/* Animated background */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
-        </div>
-        
-        <div className="max-w-4xl mx-auto text-center relative">
-          <h2 className="scroll-animate text-4xl md:text-5xl font-bold text-white mb-6 opacity-0">Ready to Scale Your Business?</h2>
-          <p className="scroll-animate text-xl text-blue-100 mb-8 opacity-0 stagger-1">
-            Get a free marketing audit and discover how we can help you achieve your goals.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#contact" className="scroll-animate px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-lg opacity-0 stagger-2">
-              Get Free Audit
-            </a>
-            <a href="tel:+15550123" className="scroll-animate px-8 py-4 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-800 hover:scale-105 hover:shadow-2xl transition-all duration-300 opacity-0 stagger-3">
-              Call Us: (555) 012-3456
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-16 border-t border-slate-700 bg-slate-900">
+      {/* Premium Footer */}
+      <footer className="py-16 border-t border-amber-500/10 bg-slate-950/50 backdrop-blur-xl relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div>
-              <div className="text-2xl font-bold mb-4">
-                <span className="text-blue-400">iffi</span>
-                <span className="text-white">Media</span>
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30">
+                <img src="https://image.qwenlm.ai/generated-images/4d590224-14d9-4692-9f90-4049a88e55c2/_result.png" alt="Lama" className="w-8 h-8 object-contain" />
               </div>
-              <p className="text-slate-400 text-sm mb-4">
-                Digital marketing agency delivering measurable results through data-driven strategies.
-              </p>
-              <p className="text-slate-500 text-xs">
-                Founded by IRFAN ABDUL MAJID
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-white font-bold mb-4">Services</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#services" className="text-slate-400 hover:text-white transition">SEO Services</a></li>
-                <li><a href="#services" className="text-slate-400 hover:text-white transition">PPC Advertising</a></li>
-                <li><a href="#services" className="text-slate-400 hover:text-white transition">Social Media Marketing</a></li>
-                <li><a href="#services" className="text-slate-400 hover:text-white transition">Email Marketing</a></li>
-                <li><a href="#services" className="text-slate-400 hover:text-white transition">Content Marketing</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-white font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#results" className="text-slate-400 hover:text-white transition">Case Studies</a></li>
-                <li><a href="#career" className="text-slate-400 hover:text-white transition">Careers</a></li>
-                <li><a href="#contact" className="text-slate-400 hover:text-white transition">Contact Us</a></li>
-                <li><a href="#" className="text-slate-400 hover:text-white transition">Privacy Policy</a></li>
-                <li><a href="#" className="text-slate-400 hover:text-white transition">Terms of Service</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-white font-bold mb-4">Contact Info</h4>
-              <ul className="space-y-3 text-sm text-slate-400">
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400">📧</span>
-                  <span>hello@iffimedia.com</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400">📞</span>
-                  <span>(555) 012-3456</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400">🕒</span>
-                  <span>Mon-Fri: 9AM - 6PM EST</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400">📍</span>
-                  <span>Serving clients nationwide</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-slate-700 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-slate-500 text-sm">
-                © 2026 iffiMedia. All rights reserved.
-              </p>
-              <div className="flex gap-4">
-                <a href="#" className="text-slate-400 hover:text-white transition" aria-label="Facebook">
-                  <i className="fab fa-facebook text-xl"></i>
-                </a>
-                <a href="#" className="text-slate-400 hover:text-white transition" aria-label="Twitter">
-                  <i className="fab fa-twitter text-xl"></i>
-                </a>
-                <a href="#" className="text-slate-400 hover:text-white transition" aria-label="LinkedIn">
-                  <i className="fab fa-linkedin text-xl"></i>
-                </a>
-                <a href="#" className="text-slate-400 hover:text-white transition" aria-label="Instagram">
-                  <i className="fab fa-instagram text-xl"></i>
-                </a>
+              <div className="text-3xl font-bold bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">
+                lamaMedia
               </div>
             </div>
+            <p className="text-slate-400 mb-6 text-lg">
+              Founded by <span className="text-amber-400 font-semibold">Irfan Abdul Majid</span>
+            </p>
+            <p className="text-slate-500 text-sm">
+              © 2026 lamaMedia. All rights reserved. Premium Digital Marketing Agency.
+            </p>
           </div>
         </div>
       </footer>
