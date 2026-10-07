@@ -1,13 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
-import LiveChat from './components/LiveChat';
-import MeetingScheduler from './components/MeetingScheduler';
-import CaseStudyDetail, { detailedCaseStudies } from './components/CaseStudyDetail';
-import IndustryPage from './components/IndustryPage';
-import ROICalculator from './components/ROICalculator';
-import CookieConsent from './components/CookieConsent';
-import VideoSection from './components/VideoSection';
-import ReviewsWidget from './components/ReviewsWidget';
-import CareerPage from './components/CareerPage';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+
+// Lazy load heavy components for better performance
+const LiveChat = lazy(() => import('./components/LiveChat'));
+const MeetingScheduler = lazy(() => import('./components/MeetingScheduler'));
+const CaseStudyDetail = lazy(() => import('./components/CaseStudyDetail'));
+const IndustryPage = lazy(() => import('./components/IndustryPage'));
+const ROICalculator = lazy(() => import('./components/ROICalculator'));
+const CookieConsent = lazy(() => import('./components/CookieConsent'));
+const VideoSection = lazy(() => import('./components/VideoSection'));
+const ReviewsWidget = lazy(() => import('./components/ReviewsWidget'));
+const CareerPage = lazy(() => import('./components/CareerPage'));
+
+// Import case studies data eagerly (it's small)
+import { detailedCaseStudies } from './data/caseStudies';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,7 +57,11 @@ function App() {
 
   // If on career page, show CareerPage component
   if (currentPage === 'career') {
-    return <CareerPage onBack={() => setCurrentPage('home')} />;
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">Loading...</div>}>
+        <CareerPage onBack={() => setCurrentPage('home')} />
+      </Suspense>
+    );
   }
 
   return (
@@ -676,12 +685,16 @@ function App() {
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-30"></div>
               <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-blue-500/20 p-10 md:p-12">
                 <h3 className="text-3xl font-bold text-white mb-10 text-center">Send Us a Message</h3>
-                <form className="space-y-6">
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" className="space-y-6">
+                  <input type="hidden" name="_subject" value="New Contact Form Submission from lamaMedia" />
+                  <input type="hidden" name="_next" value="https://lamamedia.com/?success=true" />
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-slate-300 mb-3">Full Name *</label>
                       <input 
                         type="text" 
+                        name="full_name"
                         required
                         placeholder="John Smith"
                         className="w-full px-5 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-white placeholder-slate-500 transition-all" 
@@ -691,6 +704,7 @@ function App() {
                       <label className="block text-sm font-semibold text-slate-300 mb-3">Email Address *</label>
                       <input 
                         type="email" 
+                        name="email"
                         required
                         placeholder="john@company.com"
                         className="w-full px-5 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-white placeholder-slate-500 transition-all" 
@@ -702,6 +716,7 @@ function App() {
                       <label className="block text-sm font-semibold text-slate-300 mb-3">Phone Number</label>
                       <input 
                         type="tel" 
+                        name="phone"
                         placeholder="+1 (555) 000-0000"
                         className="w-full px-5 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-white placeholder-slate-500 transition-all" 
                       />
@@ -712,6 +727,7 @@ function App() {
                       </label>
                       <input 
                         type="tel" 
+                        name="whatsapp"
                         placeholder="+1 (555) 000-0000"
                         className="w-full px-5 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-white placeholder-slate-500 transition-all" 
                       />
@@ -725,6 +741,7 @@ function App() {
                       </label>
                       <input 
                         type="text" 
+                        name="website"
                         placeholder="iffi.com or https://yourwebsite.com"
                         pattern="^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$"
                         title="Enter a valid website URL (e.g., iffi.com or https://yourwebsite.com)"
@@ -736,7 +753,7 @@ function App() {
                       <label className="block text-sm font-semibold text-slate-300 mb-3">
                         Monthly Marketing Budget <span className="text-slate-500 font-normal">(Optional)</span>
                       </label>
-                      <select className="w-full px-5 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-white transition-all">
+                      <select name="budget" className="w-full px-5 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-white transition-all">
                         <option value="">Select budget range</option>
                         <option value="under-2k">Under $2,000</option>
                         <option value="2k-5k">$2,000 - $5,000</option>
@@ -749,6 +766,7 @@ function App() {
                   <div>
                     <label className="block text-sm font-semibold text-slate-300 mb-3">Tell Us About Your Project *</label>
                     <textarea 
+                      name="message"
                       rows={6} 
                       required
                       placeholder="What are your goals? What challenges are you facing? What services are you interested in?"
@@ -759,11 +777,12 @@ function App() {
                   {/* Industry Selection */}
                   <div>
                     <label className="block text-sm font-semibold text-slate-300 mb-3">Your Industry</label>
+                    <input type="hidden" name="industry" value={selectedIndustry} />
                     <div className="grid grid-cols-3 gap-3">
                       <button
                         type="button"
                         onClick={() => setSelectedIndustry('ecommerce')}
-                        className="p-3 bg-slate-800/50 border border-blue-500/20 rounded-xl hover:border-blue-500/50 transition-all text-center group"
+                        className={`p-3 border rounded-xl transition-all text-center group ${selectedIndustry === 'ecommerce' ? 'bg-blue-500/20 border-blue-500/50' : 'bg-slate-800/50 border-blue-500/20 hover:border-blue-500/50'}`}
                       >
                         <div className="text-2xl mb-1">🛒</div>
                         <div className="text-xs text-slate-300 group-hover:text-blue-400">E-commerce</div>
@@ -771,7 +790,7 @@ function App() {
                       <button
                         type="button"
                         onClick={() => setSelectedIndustry('saas')}
-                        className="p-3 bg-slate-800/50 border border-blue-500/20 rounded-xl hover:border-blue-500/50 transition-all text-center group"
+                        className={`p-3 border rounded-xl transition-all text-center group ${selectedIndustry === 'saas' ? 'bg-blue-500/20 border-blue-500/50' : 'bg-slate-800/50 border-blue-500/20 hover:border-blue-500/50'}`}
                       >
                         <div className="text-2xl mb-1">💻</div>
                         <div className="text-xs text-slate-300 group-hover:text-blue-400">SaaS</div>
@@ -779,7 +798,7 @@ function App() {
                       <button
                         type="button"
                         onClick={() => setSelectedIndustry('healthcare')}
-                        className="p-3 bg-slate-800/50 border border-blue-500/20 rounded-xl hover:border-blue-500/50 transition-all text-center group"
+                        className={`p-3 border rounded-xl transition-all text-center group ${selectedIndustry === 'healthcare' ? 'bg-blue-500/20 border-blue-500/50' : 'bg-slate-800/50 border-blue-500/20 hover:border-blue-500/50'}`}
                       >
                         <div className="text-2xl mb-1">🏥</div>
                         <div className="text-xs text-slate-300 group-hover:text-blue-400">Healthcare</div>
@@ -788,12 +807,18 @@ function App() {
                   </div>
 
                   {/* ROI Calculator */}
-                  <ROICalculator />
+                  <Suspense fallback={<div className="py-4 text-center text-slate-400">Loading calculator...</div>}>
+                    <ROICalculator />
+                  </Suspense>
 
                   <button type="submit" className="group relative w-full py-5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
                     <span className="relative z-10">Send Message →</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-xl blur opacity-50 group-hover:opacity-100 transition-opacity"></div>
                   </button>
+                  
+                  <p className="text-xs text-slate-500 text-center mt-4">
+                    We'll respond within 24 hours. Your information is secure and will never be shared.
+                  </p>
                 </form>
               </div>
             </div>
@@ -802,10 +827,14 @@ function App() {
       </section>
 
       {/* Video Section */}
-      <VideoSection />
+      <Suspense fallback={<div className="py-20 text-center text-slate-400">Loading...</div>}>
+        <VideoSection />
+      </Suspense>
       
       {/* Reviews Widget */}
-      <ReviewsWidget />
+      <Suspense fallback={<div className="py-20 text-center text-slate-400">Loading...</div>}>
+        <ReviewsWidget />
+      </Suspense>
 
       {/* Premium Footer - LAST CONTENT SECTION */}
       <footer className="py-16 border-t border-blue-500/10 bg-slate-950/50 backdrop-blur-xl relative">
@@ -920,28 +949,31 @@ function App() {
         </svg>
       </button>
 
-      {/* Live Chat Widget */}
-      <LiveChat />
+      {/* Lazy-loaded components with Suspense */}
+      <Suspense fallback={null}>
+        {/* Live Chat Widget */}
+        <LiveChat />
 
-      {/* Meeting Scheduler */}
-      <MeetingScheduler />
+        {/* Meeting Scheduler */}
+        <MeetingScheduler />
 
-      {/* Cookie Consent */}
-      <CookieConsent />
+        {/* Cookie Consent */}
+        <CookieConsent />
 
-      {/* Case Study Detail Modal */}
-      <CaseStudyDetail 
-        isOpen={!!selectedCaseStudy} 
-        onClose={() => setSelectedCaseStudy(null)} 
-        caseStudy={selectedCaseStudy} 
-      />
+        {/* Case Study Detail Modal */}
+        <CaseStudyDetail 
+          isOpen={!!selectedCaseStudy} 
+          onClose={() => setSelectedCaseStudy(null)} 
+          caseStudy={selectedCaseStudy} 
+        />
 
-      {/* Industry Page Modal */}
-      <IndustryPage 
-        isOpen={!!selectedIndustry} 
-        onClose={() => setSelectedIndustry('')} 
-        industry={selectedIndustry} 
-      />
+        {/* Industry Page Modal */}
+        <IndustryPage 
+          isOpen={!!selectedIndustry} 
+          onClose={() => setSelectedIndustry('')} 
+          industry={selectedIndustry} 
+        />
+      </Suspense>
     </div>
   );
 }
