@@ -1,123 +1,37 @@
 @import "tailwindcss";
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom animations */
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-/* Premium glassmorphism */
-.glass-premium {
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 8px 32px 0 rgba(0, 0, 0, 0.3),
-    0 0 60px rgba(16, 185, 129, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-}
-
-/* Smooth transitions */
-* {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-}
-
-/* Custom scrollbar */
+/* Simple, clean scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #10b981, #06b6d4);
-  border-radius: 6px;
-  border: 2px solid rgba(15, 23, 42, 0.5);
+  background: #888;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #059669, #0891b2);
+  background: #555;
 }
 
-/* Selection color */
+/* Selection */
 ::selection {
-  background: rgba(16, 185, 129, 0.3);
-  color: #ffffff;
-}
-
-/* Gradient text enhancement */
-.gradient-text {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 80px rgba(16, 185, 129, 0.5);
-}
-
-/* Glow effects */
-.glow-emerald {
-  box-shadow: 
-    0 0 20px rgba(16, 185, 129, 0.5),
-    0 0 40px rgba(16, 185, 129, 0.3),
-    0 0 60px rgba(16, 185, 129, 0.2);
-}
-
-.glow-cyan {
-  box-shadow: 
-    0 0 20px rgba(6, 182, 212, 0.5),
-    0 0 40px rgba(6, 182, 212, 0.3),
-    0 0 60px rgba(6, 182, 212, 0.2);
-}
-
-/* Hover lift effect */
-.hover-lift {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hover-lift:hover {
-  transform: translateY(-8px);
-}
-
-/* Pulse animation for badges */
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-  }
-  50% {
-    opacity: 0.8;
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.8);
-  }
-}
-
-.pulse-glow {
-  animation: pulse-glow 2s infinite;
+  background: #000;
+  color: #fff;
 }
