@@ -79,7 +79,7 @@ function App() {
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-3 group cursor-pointer">
               <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-300 group-hover:scale-110">
-                <img src="https://image.qwenlm.ai/generated-images/afc3f2c0-e1d3-4edb-ab25-0a494520bfe4/_result.png" alt="lamaMedia" className="w-full h-full object-cover" />
+                <img src="https://image.qwenlm.ai/generated-images/62f4c8cf-0f54-465c-af84-fff2c3986a54/_result.png" alt="Lama" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -834,7 +834,7 @@ function App() {
             <div className="md:col-span-1">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-blue-500/30">
-                  <img src="https://image.qwenlm.ai/generated-images/afc3f2c0-e1d3-4edb-ab25-0a494520bfe4/_result.png" alt="lamaMedia" className="w-full h-full object-cover" />
+                  <img src="https://image.qwenlm.ai/generated-images/62f4c8cf-0f54-465c-af84-fff2c3986a54/_result.png" alt="Lama" className="w-full h-full object-cover" />
                 </div>
                 <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                   lamaMedia
