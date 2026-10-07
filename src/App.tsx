@@ -207,6 +207,80 @@ function App() {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              Trusted by leading brands across the USA
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                quote: "iffiMedia transformed our Facebook ad strategy completely. We went from burning cash to a predictable 4.8x ROAS in just 8 weeks. Their data-driven approach is unmatched.",
+                name: "Sarah Mitchell",
+                title: "Marketing Director",
+                company: "TechFlow Solutions",
+                location: "Austin, TX"
+              },
+              {
+                quote: "The Google Ads campaigns they built for us reduced our customer acquisition cost by 62% while scaling to $200K monthly revenue. Absolutely game-changing results.",
+                name: "Michael Chen",
+                title: "CEO",
+                company: "Pacific Coast Retail",
+                location: "San Diego, CA"
+              },
+              {
+                quote: "Their SEO work took us from page 3 to position 1 for our main keywords in 4 months. Organic traffic increased 312% and we're now generating 45+ leads daily.",
+                name: "Jennifer Rodriguez",
+                title: "Operations Manager",
+                company: "Summit Healthcare Group",
+                location: "Denver, CO"
+              },
+              {
+                quote: "We hired iffiMedia for our TikTok advertising and the results were incredible. 12M+ views in the first month and our brand awareness skyrocketed. Highly recommend.",
+                name: "David Thompson",
+                title: "Brand Manager",
+                company: "Urban Style Co.",
+                location: "New York, NY"
+              },
+              {
+                quote: "The email marketing automation they set up in Klaviyo now generates 47% of our total revenue. The abandoned cart flow alone recovered $38K in the first month.",
+                name: "Amanda Foster",
+                title: "E-commerce Director",
+                company: "Luxe Home Decor",
+                location: "Chicago, IL"
+              },
+              {
+                quote: "Working with iffiMedia was the best decision we made. They scaled our SaaS from $50K to $400K MRR in 6 months with a full-funnel Google Ads strategy.",
+                name: "Robert Kim",
+                title: "Founder",
+                company: "CloudSync Platform",
+                location: "Seattle, WA"
+              }
+            ].map((testimonial, idx) => (
+              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 transition">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-yellow-400 text-xl">★</span>
+                  ))}
+                </div>
+                <p className="text-slate-300 text-sm mb-6 leading-relaxed">"{testimonial.quote}"</p>
+                <div className="border-t border-slate-700 pt-4">
+                  <div className="font-bold text-white">{testimonial.name}</div>
+                  <div className="text-sm text-slate-400">{testimonial.title}</div>
+                  <div className="text-sm text-blue-400 font-medium">{testimonial.company}</div>
+                  <div className="text-xs text-slate-500">{testimonial.location}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Career */}
       <section id="career" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
         <div className="max-w-7xl mx-auto">
