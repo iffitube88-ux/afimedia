@@ -865,34 +865,7 @@ function App() {
         </div>
       </footer>
 
-      {/* Sticky Contact Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-xl border-t border-blue-500/20 z-40 py-3 px-4 hidden md:block">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <a href="tel:+15551234567" className="flex items-center gap-2 text-blue-400 hover:text-cyan-400 transition font-semibold">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-              </svg>
-              <span>(555) 123-4567</span>
-            </a>
-            <a href="mailto:hello@lamamedia.com" className="flex items-center gap-2 text-blue-400 hover:text-cyan-400 transition font-semibold">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-              </svg>
-              <span>hello@lamamedia.com</span>
-            </a>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href="#contact" className="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-bold hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300">
-              Get Free Audit
-            </a>
-            <button className="px-6 py-2 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition-all duration-300">
-              Live Chat
-            </button>
-          </div>
-        </div>
-      </div>
+
 
       {/* Back to Top Button */}
       <button 
