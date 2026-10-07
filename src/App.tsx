@@ -73,6 +73,12 @@ function App() {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
               ))}
+              <a href="tel:+15551234567" className="flex items-center gap-2 text-blue-400 hover:text-cyan-400 transition font-semibold">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                </svg>
+                <span>(555) 123-4567</span>
+              </a>
               <a href="#contact" className="px-6 py-2.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-bold hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
                 Get Started
               </a>
@@ -174,6 +180,42 @@ function App() {
           </div>
         </div>
       </header>
+
+      {/* Client Logos Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 border-y border-blue-500/10">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-slate-500 text-sm mb-8 uppercase tracking-wider font-semibold">Trusted by Industry Leaders</p>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center opacity-60 hover:opacity-100 transition-opacity duration-300">
+            {['TechFlow', 'Pacific Coast', 'Summit Health', 'Urban Style', 'Luxe Home', 'CloudSync'].map((brand, idx) => (
+              <div key={idx} className="text-center group cursor-pointer">
+                <div className="text-slate-400 font-bold text-lg group-hover:text-blue-400 transition-colors duration-300">
+                  {brand}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Badges Section */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-wrap justify-center items-center gap-6">
+            {[
+              { name: 'Google Partner', icon: '🏆' },
+              { name: 'Meta Business Partner', icon: '📘' },
+              { name: 'Clutch Top Agency', icon: '⭐' },
+              { name: 'Inc. 5000', icon: '📊' },
+              { name: '4.9★ Google Reviews', icon: '💎' }
+            ].map((badge, idx) => (
+              <div key={idx} className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 border border-blue-500/20 rounded-full hover:border-blue-500/50 transition-all duration-300">
+                <span className="text-xl">{badge.icon}</span>
+                <span className="text-sm font-medium text-slate-300">{badge.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Premium Stats Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
@@ -440,6 +482,65 @@ function App() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
+              Meet Our <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Team</span>
+            </h2>
+            <p className="scroll-animate text-xl text-slate-400 max-w-3xl mx-auto opacity-0 stagger-1">
+              The experts behind your success
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: 'Irfan Abdul Majid', role: 'Founder & CEO', specialty: 'Digital Strategy', emoji: '👨‍💼' },
+              { name: 'Sarah Johnson', role: 'Head of SEO', specialty: 'Technical SEO Expert', emoji: '👩‍💻' },
+              { name: 'Michael Chen', role: 'PPC Director', specialty: 'Google & Meta Ads', emoji: '👨‍💻' },
+              { name: 'Emily Rodriguez', role: 'Content Lead', specialty: 'Content Strategy', emoji: '👩‍🎨' }
+            ].map((member, idx) => (
+              <div key={idx} className="scroll-animate group relative opacity-0" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-blue-500/20 p-8 text-center hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2">
+                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-5xl">
+                    {member.emoji}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
+                  <p className="text-blue-400 font-semibold mb-2">{member.role}</p>
+                  <p className="text-slate-400 text-sm">{member.specialty}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Signup */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-4xl mx-auto">
+          <div className="scroll-animate relative opacity-0">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-30"></div>
+            <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-blue-500/20 p-12 text-center">
+              <h3 className="text-3xl font-bold text-white mb-4">Get Weekly Marketing Tips</h3>
+              <p className="text-slate-400 mb-8">Join 5,000+ marketers receiving actionable insights every week</p>
+              <form className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email"
+                  className="flex-1 px-6 py-4 bg-slate-800/50 border border-blue-500/20 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-white placeholder-slate-500"
+                />
+                <button type="submit" className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-bold hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
+                  Subscribe
+                </button>
+              </form>
+              <p className="text-slate-500 text-sm mt-4">No spam. Unsubscribe anytime.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -712,6 +813,46 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Sticky Contact Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-xl border-t border-blue-500/20 z-40 py-3 px-4 hidden md:block">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <a href="tel:+15551234567" className="flex items-center gap-2 text-blue-400 hover:text-cyan-400 transition font-semibold">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+              </svg>
+              <span>(555) 123-4567</span>
+            </a>
+            <a href="mailto:hello@lamamedia.com" className="flex items-center gap-2 text-blue-400 hover:text-cyan-400 transition font-semibold">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
+              <span>hello@lamamedia.com</span>
+            </a>
+          </div>
+          <div className="flex items-center gap-4">
+            <a href="#contact" className="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-bold hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300">
+              Get Free Audit
+            </a>
+            <button className="px-6 py-2 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition-all duration-300">
+              Live Chat
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Back to Top Button */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-24 right-8 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full shadow-lg shadow-blue-500/50 hover:shadow-2xl hover:scale-110 transition-all duration-300 z-30 hidden md:flex items-center justify-center"
+        aria-label="Back to top"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </button>
     </div>
   );
 }
