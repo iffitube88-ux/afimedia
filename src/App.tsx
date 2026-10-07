@@ -52,7 +52,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-3 group cursor-pointer">
-              <div className="w-12 h-12 rounded-xl bg-slate-950 border border-blue-500/20 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-300 group-hover:scale-110">
                 <img src="https://image.qwenlm.ai/generated-images/01418fa8-403b-4c10-b6eb-b2e9954d2fea/_result.png" alt="Lama" className="w-10 h-10 object-contain" />
               </div>
               <div>
@@ -556,7 +556,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-slate-950 border border-blue-500/20 flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
                 <img src="https://image.qwenlm.ai/generated-images/01418fa8-403b-4c10-b6eb-b2e9954d2fea/_result.png" alt="Lama" className="w-10 h-10 object-contain" />
               </div>
               <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
