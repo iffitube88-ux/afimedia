@@ -79,7 +79,7 @@ function App() {
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-3 group cursor-pointer">
               <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-300 group-hover:scale-110">
-                <img src="https://image.qwenlm.ai/generated-images/62f4c8cf-0f54-465c-af84-fff2c3986a54/_result.png" alt="Lama" className="w-full h-full object-cover" />
+                <img src="https://image.qwenlm.ai/generated-images/afc3f2c0-e1d3-4edb-ab25-0a494520bfe4/_result.png" alt="lamaMedia" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -89,31 +89,18 @@ function App() {
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              {['Services', 'Results', 'Pricing', 'Blog', 'Contact'].map((item) => (
+              {['Services', 'Case Studies', 'Pricing', 'Contact'].map((item) => (
                 <a 
                   key={item} 
-                  href={`#${item.toLowerCase()}`} 
-                  className="relative text-slate-300 hover:text-blue-400 transition font-medium group"
+                  href={`#${item.toLowerCase().replace(' ', '-')}`} 
+                  className="relative text-slate-300 hover:text-white transition font-medium group"
                 >
                   {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
               ))}
-              <button 
-                onClick={() => setCurrentPage('career')}
-                className="relative text-slate-300 hover:text-blue-400 transition font-medium group"
-              >
-                Career
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
-              </button>
-              <a href="tel:+15551234567" className="flex items-center gap-2 text-blue-400 hover:text-cyan-400 transition font-semibold">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                </svg>
-                <span>(555) 123-4567</span>
-              </a>
-              <a href="#contact" className="px-6 py-2.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-bold hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
-                Get Started
+              <a href="#contact" className="px-6 py-2.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
+                Book a Free Audit
               </a>
             </div>
 
@@ -131,20 +118,23 @@ function App() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-slate-950/95 backdrop-blur-xl border-t border-blue-500/10">
             <div className="px-4 py-6 space-y-3">
-              {['Services', 'Results', 'Pricing', 'Blog', 'Contact'].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="block text-slate-300 hover:text-blue-400 font-medium py-2">
+              {['Services', 'Case Studies', 'Pricing', 'Contact'].map((item) => (
+                <a 
+                  key={item} 
+                  href={`#${item.toLowerCase().replace(' ', '-')}`} 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-slate-300 hover:text-white font-medium py-2"
+                >
                   {item}
                 </a>
               ))}
-              <button 
-                onClick={() => {
-                  setCurrentPage('career');
-                  setMobileMenuOpen(false);
-                }}
-                className="block text-left text-slate-300 hover:text-blue-400 font-medium py-2 w-full"
+              <a 
+                href="#contact" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full text-center px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold mt-4"
               >
-                Career
-              </button>
+                Book a Free Audit
+              </a>
             </div>
           </div>
         )}
@@ -192,10 +182,10 @@ function App() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12 animate-fade-in-up stagger-4">
               <a href="#contact" className="group relative px-10 py-5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
-                <span className="relative z-10">Get Free Marketing Audit →</span>
+                <span className="relative z-10">Schedule Strategy Call →</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-xl blur opacity-50 group-hover:opacity-100 transition-opacity"></div>
               </a>
-              <a href="#results" className="px-10 py-5 bg-slate-800/50 backdrop-blur-sm border-2 border-blue-500/30 text-white rounded-xl font-bold text-lg hover:bg-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:scale-105">
+              <a href="#case-studies" className="px-10 py-5 bg-slate-800/50 backdrop-blur-sm border-2 border-blue-500/30 text-white rounded-xl font-bold text-lg hover:bg-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:scale-105">
                 View Case Studies
               </a>
             </div>
@@ -325,7 +315,7 @@ function App() {
       </section>
 
       {/* Premium Results Section */}
-      <section id="results" className="py-20 px-4 sm:px-6 lg:px-8 relative">
+      <section id="case-studies" className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="scroll-animate text-5xl md:text-6xl font-black text-white mb-6 opacity-0">
@@ -844,7 +834,7 @@ function App() {
             <div className="md:col-span-1">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-blue-500/30">
-                  <img src="https://image.qwenlm.ai/generated-images/62f4c8cf-0f54-465c-af84-fff2c3986a54/_result.png" alt="Lama" className="w-full h-full object-cover" />
+                  <img src="https://image.qwenlm.ai/generated-images/afc3f2c0-e1d3-4edb-ab25-0a494520bfe4/_result.png" alt="lamaMedia" className="w-full h-full object-cover" />
                 </div>
                 <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                   lamaMedia
@@ -874,10 +864,8 @@ function App() {
             <div>
               <h3 className="text-white font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="#results" className="text-slate-400 hover:text-blue-400 transition text-sm">Case Studies</a></li>
+                <li><a href="#case-studies" className="text-slate-400 hover:text-blue-400 transition text-sm">Case Studies</a></li>
                 <li><a href="#pricing" className="text-slate-400 hover:text-blue-400 transition text-sm">Pricing</a></li>
-                <li><a href="#blog" className="text-slate-400 hover:text-blue-400 transition text-sm">Blog</a></li>
-                <li><button onClick={() => setCurrentPage('career')} className="text-slate-400 hover:text-blue-400 transition text-sm text-left">Careers</button></li>
                 <li><a href="#contact" className="text-slate-400 hover:text-blue-400 transition text-sm">Contact</a></li>
               </ul>
             </div>
@@ -888,9 +876,6 @@ function App() {
               <ul className="space-y-2 text-sm">
                 <li className="text-slate-400">
                   <span className="text-blue-400">📧</span> hello@lamamedia.com
-                </li>
-                <li className="text-slate-400">
-                  <span className="text-blue-400">📞</span> +1 (555) 123-4567
                 </li>
                 <li className="text-slate-400">
                   <span className="text-blue-400">📍</span> Remote Worldwide
