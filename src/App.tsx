@@ -49,33 +49,42 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <header className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-12 md:p-20">
             <div className="text-center">
               <div className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
-                <span className="text-sm font-medium text-blue-400">Founded by IRFAN ABDUL MAJID</span>
+                <span className="text-sm font-medium text-blue-400">🏆 Trusted by 47+ Businesses Across USA</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                <span className="text-white">Digital Marketing</span>
+                <span className="text-white">Digital Marketing Agency</span>
                 <br />
                 <span className="text-blue-400">That Delivers Results</span>
               </h1>
-              <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-                We help brands scale revenue through data-driven paid ads, SEO, and conversion optimization.
+              <p className="text-xl text-slate-400 mb-6 max-w-3xl mx-auto">
+                iffiMedia is a full-service digital marketing agency specializing in <strong className="text-white">SEO services</strong>, <strong className="text-white">PPC advertising</strong>, <strong className="text-white">social media marketing</strong>, and <strong className="text-white">conversion optimization</strong>. We help brands scale revenue through data-driven strategies.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto">
+                Founded by <strong className="text-blue-400">Irfan Abdul Majid</strong> • Serving clients nationwide
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <a href="#contact" className="px-8 py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition shadow-lg shadow-blue-500/20">
-                  Get Free Audit
+                  Get Free Marketing Audit
                 </a>
                 <a href="#results" className="px-8 py-4 bg-slate-700 text-white rounded-lg font-semibold hover:bg-slate-600 transition">
-                  View Results
+                  View Case Studies
                 </a>
+              </div>
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+                <span>✓ No Long-Term Contracts</span>
+                <span>✓ Transparent Reporting</span>
+                <span>✓ ROI-Focused</span>
+                <span>✓ 24/7 Support</span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </header>
 
       {/* Stats */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
@@ -87,9 +96,25 @@ function App() {
               { value: '150%', label: 'Avg. ROAS' },
               { value: '5+', label: 'Years Experience' }
             ].map((stat, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 text-center hover:border-blue-500/50 transition">
+              <article key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 text-center hover:border-blue-500/50 transition">
                 <div className="text-4xl font-bold text-blue-400 mb-2">{stat.value}</div>
                 <div className="text-slate-400 font-medium">{stat.label}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 border-y border-slate-700">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-slate-500 text-sm mb-8 uppercase tracking-wider">Trusted by Leading Brands</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+            {['TechFlow', 'Pacific Coast', 'Summit Health', 'Urban Style', 'Luxe Home', 'CloudSync'].map((brand, idx) => (
+              <div key={idx} className="text-center">
+                <div className="text-slate-500 font-bold text-lg hover:text-blue-400 transition cursor-pointer">
+                  {brand}
+                </div>
               </div>
             ))}
           </div>
@@ -100,9 +125,9 @@ function App() {
       <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Services</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Digital Marketing Services</h2>
             <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              Comprehensive digital marketing solutions tailored to your business goals
+              Comprehensive SEO, PPC, social media, and email marketing solutions tailored to your business goals
             </p>
           </div>
 
@@ -343,20 +368,184 @@ function App() {
         </div>
       </section>
 
+      {/* Process Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Proven Process</h2>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              A systematic approach to delivering measurable results
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { step: '01', title: 'Discovery & Audit', desc: 'Deep dive into your business, competitors, and current marketing performance' },
+              { step: '02', title: 'Strategy Development', desc: 'Custom roadmap tailored to your goals, budget, and timeline' },
+              { step: '03', title: 'Execution & Launch', desc: 'Implement campaigns with precision across all chosen channels' },
+              { step: '04', title: 'Optimize & Scale', desc: 'Continuous testing, optimization, and scaling of winning strategies' }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-8 hover:border-blue-500/50 transition relative">
+                <div className="text-6xl font-bold text-blue-500/20 absolute top-4 right-4">{item.step}</div>
+                <h3 className="text-xl font-bold text-white mb-3 relative z-10">{item.title}</h3>
+                <p className="text-slate-400 text-sm relative z-10">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industries Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Industries We Serve</h2>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              Specialized expertise across diverse sectors
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {['E-commerce', 'SaaS', 'Healthcare', 'Real Estate', 'Finance', 'Education', 'Restaurant', 'Fitness', 'Legal', 'Technology', 'Retail', 'Manufacturing'].map((industry, idx) => (
+              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-700 p-4 text-center hover:border-blue-500/50 transition">
+                <div className="text-white font-medium text-sm">{industry}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <p className="text-xl text-slate-400">
+              Everything you need to know about working with iffiMedia
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { q: 'How long does it take to see results from digital marketing?', a: 'Results vary by channel. PPC campaigns can show results within days, while SEO typically takes 3-6 months for significant organic growth. We set clear expectations and milestones from day one.' },
+              { q: 'What is your minimum contract length?', a: 'We offer flexible engagement models. Project-based work has no commitment, while monthly retainers typically start at 3 months to allow sufficient time for optimization and results.' },
+              { q: 'Do you work with small businesses or only large companies?', a: 'We work with businesses of all sizes. Our pricing scales based on your needs and budget. Whether you\'re a startup or established enterprise, we have solutions that fit.' },
+              { q: 'What makes iffiMedia different from other agencies?', a: 'Our data-driven approach, transparent reporting, and focus on ROI set us apart. We don\'t just run campaigns; we build sustainable growth systems. Plus, you work directly with senior strategists, not junior account managers.' },
+              { q: 'How do you measure success?', a: 'We establish KPIs aligned with your business goals during onboarding. This could be ROAS, conversion rate, organic traffic, lead generation, or revenue growth. We provide detailed monthly reports with actionable insights.' },
+              { q: 'Can I cancel my retainer at any time?', a: 'Yes, after the initial commitment period, you can cancel with 30 days notice. We believe in earning your business every month through results, not contracts.' }
+            ].map((faq, idx) => (
+              <details key={idx} className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-6 hover:border-blue-500/50 transition group">
+                <summary className="text-lg font-bold text-white cursor-pointer list-none flex justify-between items-center">
+                  {faq.q}
+                  <span className="text-blue-400 text-2xl group-open:rotate-45 transition-transform">+</span>
+                </summary>
+                <p className="text-slate-400 mt-4 text-sm leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Scale Your Business?</h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Get a free marketing audit and discover how we can help you achieve your goals.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#contact" className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition shadow-lg">
+              Get Free Audit
+            </a>
+            <a href="tel:+15550123" className="px-8 py-4 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-800 transition">
+              Call Us: (555) 012-3456
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="py-12 border-t border-slate-700">
+      <footer className="py-16 border-t border-slate-700 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="text-2xl font-bold mb-4">
-              <span className="text-blue-400">iffi</span>
-              <span className="text-white">Media</span>
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <div className="text-2xl font-bold mb-4">
+                <span className="text-blue-400">iffi</span>
+                <span className="text-white">Media</span>
+              </div>
+              <p className="text-slate-400 text-sm mb-4">
+                Digital marketing agency delivering measurable results through data-driven strategies.
+              </p>
+              <p className="text-slate-500 text-xs">
+                Founded by IRFAN ABDUL MAJID
+              </p>
             </div>
-            <p className="text-slate-400 mb-4">
-              Founded by <span className="text-blue-400 font-semibold">IRFAN ABDUL MAJID</span>
-            </p>
-            <p className="text-slate-500 text-sm">
-              © 2026 iffiMedia. All rights reserved.
-            </p>
+
+            <div>
+              <h4 className="text-white font-bold mb-4">Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#services" className="text-slate-400 hover:text-white transition">SEO Services</a></li>
+                <li><a href="#services" className="text-slate-400 hover:text-white transition">PPC Advertising</a></li>
+                <li><a href="#services" className="text-slate-400 hover:text-white transition">Social Media Marketing</a></li>
+                <li><a href="#services" className="text-slate-400 hover:text-white transition">Email Marketing</a></li>
+                <li><a href="#services" className="text-slate-400 hover:text-white transition">Content Marketing</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold mb-4">Company</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#results" className="text-slate-400 hover:text-white transition">Case Studies</a></li>
+                <li><a href="#career" className="text-slate-400 hover:text-white transition">Careers</a></li>
+                <li><a href="#contact" className="text-slate-400 hover:text-white transition">Contact Us</a></li>
+                <li><a href="#" className="text-slate-400 hover:text-white transition">Privacy Policy</a></li>
+                <li><a href="#" className="text-slate-400 hover:text-white transition">Terms of Service</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold mb-4">Contact Info</h4>
+              <ul className="space-y-3 text-sm text-slate-400">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400">📧</span>
+                  <span>hello@iffimedia.com</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400">📞</span>
+                  <span>(555) 012-3456</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400">🕒</span>
+                  <span>Mon-Fri: 9AM - 6PM EST</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400">📍</span>
+                  <span>Serving clients nationwide</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-slate-700 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-slate-500 text-sm">
+                © 2026 iffiMedia. All rights reserved.
+              </p>
+              <div className="flex gap-4">
+                <a href="#" className="text-slate-400 hover:text-white transition" aria-label="Facebook">
+                  <i className="fab fa-facebook text-xl"></i>
+                </a>
+                <a href="#" className="text-slate-400 hover:text-white transition" aria-label="Twitter">
+                  <i className="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" className="text-slate-400 hover:text-white transition" aria-label="LinkedIn">
+                  <i className="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" className="text-slate-400 hover:text-white transition" aria-label="Instagram">
+                  <i className="fab fa-instagram text-xl"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
