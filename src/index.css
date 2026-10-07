@@ -22,18 +22,18 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  background: linear-gradient(180deg, #3b82f6, #06b6d4);
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #f59e0b, #d97706);
+  background: linear-gradient(180deg, #2563eb, #0891b2);
 }
 
 /* Selection */
 ::selection {
-  background: #fbbf24;
-  color: #0f172a;
+  background: #3b82f6;
+  color: #ffffff;
 }
 
 /* Premium Animations */
@@ -101,10 +101,10 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
   }
   50% {
-    box-shadow: 0 0 60px rgba(251, 191, 36, 0.6);
+    box-shadow: 0 0 60px rgba(59, 130, 246, 0.6);
   }
 }
 
@@ -152,7 +152,7 @@ body {
 
 .hover-lift:hover {
   transform: translateY(-12px);
-  box-shadow: 0 30px 60px rgba(251, 191, 36, 0.2);
+  box-shadow: 0 30px 60px rgba(59, 130, 246, 0.2);
 }
 
 .hover-scale {
@@ -168,7 +168,7 @@ body {
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 40px rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
 }
 
 /* Premium glassmorphism */
@@ -176,16 +176,16 @@ body {
   background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.1);
 }
 
 /* Shimmer effect */
 .shimmer {
   background: linear-gradient(
     90deg,
-    rgba(251, 191, 36, 0) 0%,
-    rgba(251, 191, 36, 0.2) 50%,
-    rgba(251, 191, 36, 0) 100%
+    rgba(59, 130, 246, 0) 0%,
+    rgba(59, 130, 246, 0.2) 50%,
+    rgba(59, 130, 246, 0) 100%
   );
   background-size: 1000px 100%;
   animation: shimmer 3s infinite;
@@ -201,7 +201,7 @@ body {
 
 /* Premium gradient text */
 .gradient-text-premium {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fbbf24 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #3b82f6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -251,6 +251,6 @@ a, button, input, textarea, select {
 /* Premium focus states */
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: #fbbf24;
-  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
