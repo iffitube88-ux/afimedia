@@ -97,7 +97,7 @@ export default function LiveChat() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-44 right-8 w-96 h-[600px] bg-slate-900 rounded-2xl border border-blue-500/20 shadow-2xl shadow-blue-500/20 z-50 flex flex-col overflow-hidden animate-fade-in-up">
+        <div className="fixed bottom-24 sm:bottom-44 right-0 sm:right-8 w-full sm:w-96 h-[calc(100vh-120px)] sm:h-[600px] max-h-[600px] bg-slate-900 rounded-none sm:rounded-2xl border-0 sm:border border-blue-500/20 shadow-2xl shadow-blue-500/20 z-50 flex flex-col overflow-hidden animate-fade-in-up">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-4 flex items-center gap-3">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
